@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # masuk ke directory
-cd /home/yoursemicolon/Documents/sisop-2021/modul-1/soal-shift-modul-1-B05-2021/Soal3
+cd /home/yoursemicolon/Documents/sisop-2021/modul-1/soal-shift-modul-1-B05-2021/soal3
 
 # untuk menghitung file yang sudah ada di directory
 count=1
