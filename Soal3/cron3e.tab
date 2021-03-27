@@ -1,0 +1,5 @@
+# zip saat kuliah
+0 7 * * 1-5 /bin/bash /home/yoursemicolon/Documents/sisop-2021/modul-1/soal-shift-modul-1-B05-2021/Soal3/soal3d.sh
+
+# unzip saat tidak kuliah
+0 18 * * 1-5 /bin/bash /home/yoursemicolon/Documents/sisop-2021/modul-1/soal-shift-modul-1-B05-2021/Soal3/soal3e.sh
