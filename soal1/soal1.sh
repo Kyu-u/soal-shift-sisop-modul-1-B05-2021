@@ -22,7 +22,7 @@ echo -n "Connection to DB failed, " >> error_message.csv
 echo  $connectionfailed >> error_message.csv
 echo -n "The ticket was modified while updating, " >> error_message.csv
 echo  $modified >> error_message.csv
-
+cat error_message.csv
 #gunakan ',' sebagai delimiter dan pisahkan string menjadi 2 field berdasarkan delimiter tersebut
 #order column ke 2 yang berisi angka secara numeric reverse
 sort -t, -k 2 -nr -o error_message.csv error_message.csv
@@ -45,6 +45,7 @@ while read user
 do
 	error=$(grep "ERROR.*($user)" syslog.log | wc -l)
 	info=$(grep "INFO.*($user)" syslog.log | wc -l)
+	echo "$user, INFO:$info, ERROR:$error"
 	printf "%s,%d,%d\n" $user $info $error >> user_statistic.csv
 done < temp2.txt
 
