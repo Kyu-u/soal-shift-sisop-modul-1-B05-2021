@@ -78,41 +78,41 @@ Variabel ```count``` digunakan untuk men-tracking jumlah file yang telah ada di 
 
 Berikut langkah penyelesaian untuk soal 3a:
 1. Dilakukan proses iterasi sebanyak 23 kali untuk mengunduh 23 file gambar.
-```shell script 
-for ((i=1; i<=23; i=i+1))
-```
+    ```shell script 
+    for ((i=1; i<=23; i=i+1))
+    ```
 2. Command ```wget``` untuk mengunduh file dari link https://loremflickr.com/320/240/kitten dan ```-O``` untuk me-rename file yang diunduh dengan format ```Koleksi_XX.jpg``` dan ```-a``` untuk menambahkan pesan output ke log file ```Foto.log``` tanpa overwriting.
-```shell script
-wget -O "Koleksi_$count.jpg" -a "Foto.log" https://loremflickr.com/320/240/kitten
-```
+    ```shell script
+    wget -O "Koleksi_$count.jpg" -a "Foto.log" https://loremflickr.com/320/240/kitten
+    ```
 3. Untuk mengecek kesamaan file, dilakukan perbandingan antara file yang baru diunduh dengan file-file yang ada di dalam directory unduh. Digunakan ```cmp``` untuk membandingkan konten file dan ```--silent``` atau ```-s``` agar tidak menampilkan output dari proses perbandingan. 
-4. Hasil dari ```$(cmp --silent "./Koleksi_$j.jpg" "./Koleksi_$count.jpg")``` disimpan dalam statement ```status=$?```. Dilakukan pengkondisian, jika isi file sama maka file yang baru diunduh dihapus dengan ```rm```.
-```shell script
-# cek apakah ada yang sama
-        for ((j=1; j<count; j=j+1))
-        do
-                check=$(cmp --silent "./Koleksi_$j.jpg" "./Koleksi_$count.jpg")
-                status=$?
-                if [ $status -eq 0 ]
-                then
-                        # menghapus file yang sama
-                        rm "./Koleksi_$count.jpg"
-                        (( count-- ))
-                        break
-                fi
-        done
-        (( count++ ))
-```
-5. Rename file sesuai format Koleksi_XX.jpg untuk file ke-1 sampai file ke-9 dengan ```mv```. Cek eksistensi file terlebih dahulu yang ```-e```.
-```shell script
-for i in {1..9}
-do
-        if [ -e "./Koleksi_$i.jpg" ]
-        then
-                mv "Koleksi_$i.jpg" "Koleksi_0$i.jpg"
-        fi
-done
-```
+4. Return value dari ```$(cmp --silent "./Koleksi_$j.jpg" "./Koleksi_$count.jpg")``` disimpan dalam statement ```status=$?```. Dilakukan pengkondisian, jika isi file sama maka file yang baru diunduh dihapus dengan ```rm```.
+    ```shell script
+    # cek apakah ada yang sama
+            for ((j=1; j<count; j=j+1))
+            do
+                    check=$(cmp --silent "./Koleksi_$j.jpg" "./Koleksi_$count.jpg")
+                    status=$?
+                    if [ $status -eq 0 ]
+                    then
+                            # menghapus file yang sama
+                            rm "./Koleksi_$count.jpg"
+                            (( count-- ))
+                            break
+                    fi
+            done
+            (( count++ ))
+    ```
+5. Rename file sesuai format ```Koleksi_XX.jpg``` untuk file ke-1 sampai ke-9 dengan ```mv```. Cek eksistensi file terlebih dahulu yang ```-e```.
+    ```shell script
+    for i in {1..9}
+    do
+            if [ -e "./Koleksi_$i.jpg" ]
+            then
+                    mv "Koleksi_$i.jpg" "Koleksi_0$i.jpg"
+            fi
+    done
+    ```
 
 ### Soal 3b
 
