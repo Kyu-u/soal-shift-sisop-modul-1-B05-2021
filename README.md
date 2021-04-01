@@ -4,6 +4,8 @@ Dikerjakan oleh Kelompok B05
 * Melanchthon Bonifacio Butarbutar 05111940000097
 * Nadia Tiara Febriana 05111940000217
 
+[Soal Shift 1](https://docs.google.com/document/d/1T3Y4o2lt5JvLTHdgzA5vRBQ0QYempbC5z-jcDAjela0/edit)
+
 ## Table of Contents
 1. [Soal 1](#soal1)
 2. [Soal 2](#soal2)
@@ -117,6 +119,7 @@ Berikut langkah penyelesaian untuk soal 3a:
     done
     ```
 
+<a name="soal3b"></a>
 ### Soal 3b
 **Perintah** <br>
 Jalankan script [soal 3a](#soal3a) dengan cronjob **sehari sekali pada jam 8 malam** dan **tanggal 2 empat hari sekali**. Masukkan file unduh beserta ```Foto.log``` ke folder dengan nama sesuai tanggal unduh dengan format ```DD-MM-YYYY```.
@@ -145,6 +148,20 @@ mv Foto.log "./$newDir"
 # execute soal3b.sh
 0 20 1-31/7,2-31/4 * * /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3b.sh
 ```
+
+**Penyelesaian** <br>
+Buat directory baru ```mkdir``` dengan format penamaan sesuai dengan tanggal unduh. Untuk mendapatkan tanggal unduh, gunakan command ```date``` dalam hal ini dengan statement ```newDir=$(date +"%d-%m-%Y")```. Jalankan [soal 3a](#soal3a) dengan ```bash```. Kemudian pindahkan ```mv``` seluruh file unduh serta ```Foto.log``` ke directory ```newDir```. Untuk cron-nya,
+```shell script
+0 20 1-31/7,2-31/4 * * /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3b.sh
+```
+**Dari paling kiri** <br>
+- 0 artinya cron dijalankan tiap menit 0 <br>
+- 20 artinya cron dijalankan tiap jam 20:00 <br>
+- 1-31/7 artinya cron dijalankan tiap 7 hari sekali, mulai dari tanggal 1 hingga tanggal 31 <br>
+- 2-31/4 artinya cron dijalankan tiap 4 hari sekali, mulai dari tanggal 2 hingga tanggal 31 <br>
+- \* \* artinya setiap bulan dan setiap hari <br>
+
+
 
 
 ### Soal 3c
