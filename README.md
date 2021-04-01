@@ -24,9 +24,11 @@ Dikerjakan oleh Kelompok B05
 
 <a name="soal3"></a>
 ## Soal 3
+
 <a name="soal3a"></a>
 ### Soal 3a
-Pada soal 3a, diperintahkan untuk mengunduh 23 gambar dari https://loremflickr.com/320/240/kitten dan menyimpan log-nya ke file "Foto.log". Jika ada gambar yang sama maka harus dihapus dan tidak perlu mengunduh gambar lagi untuk menggantinya. Gambar-gambar tersebut disimpan dengan nama "Koleksi_XX" berurutan tanpa ada nomor yang hilang (contoh: Koleksi_01, Koleksi_02, dst).
+**Perintah** <br>
+Pada soal 3a, diperintahkan untuk mengunduh 23 gambar dari https://loremflickr.com/320/240/kitten dan menyimpan log-nya ke file ```Foto.log```. Jika ada gambar yang sama maka harus dihapus dan tidak perlu mengunduh gambar lagi untuk menggantinya. Gambar-gambar tersebut disimpan dengan nama ```Koleksi_XX``` berurutan tanpa ada nomor yang hilang (contoh: Koleksi_01, Koleksi_02, dst).
 
 **Source code 3a**
 ```shell script
@@ -69,6 +71,7 @@ do
 done
 ```
 
+**Penyelesaian** <br>
 Pertama, masuk ke directory untuk memastikan file terunduh di tempat yang tepat.
 ```shell script
 cd ~/soal-shift-sisop-modul-1-B05-2021/soal3
@@ -103,7 +106,7 @@ Berikut langkah penyelesaian untuk soal 3a:
             done
             (( count++ ))
     ```
-5. Rename file sesuai format ```Koleksi_XX.jpg``` untuk file ke-1 sampai ke-9 dengan ```mv```. Cek eksistensi file terlebih dahulu yang ```-e```.
+5. Rename file sesuai format ```Koleksi_XX.jpg``` untuk file ke-1 sampai ke-9 dengan ```mv```. Cek eksistensi file terlebih dahulu dengan ```-e```.
     ```shell script
     for i in {1..9}
     do
@@ -115,6 +118,34 @@ Berikut langkah penyelesaian untuk soal 3a:
     ```
 
 ### Soal 3b
+**Perintah** <br>
+Jalankan script [soal 3a](#soal3a) dengan cronjob **sehari sekali pada jam 8 malam** dan **tanggal 2 empat hari sekali**. Masukkan file unduh beserta ```Foto.log``` ke folder dengan nama sesuai tanggal unduh dengan format ```DD-MM-YYYY```.
+
+**Source code**
+```shell script
+#!/bin/bash
+
+# masuk ke directory
+cd ~/soal-shift-sisop-modul-1-B05-2021/soal3
+
+# buat directory baru
+newDir=$(date +"%d-%m-%Y")
+mkdir "$newDir"
+
+# jalankan soal 3a
+bash soal3a.sh
+
+# pindahkan semua file ke directory baru
+mv *.jpg "./$newDir"
+mv Foto.log "./$newDir"
+```
+
+**Crontab**
+```shell script
+# execute soal3b.sh
+0 20 1-31/7,2-31/4 * * /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3b.sh
+```
+
 
 ### Soal 3c
 
