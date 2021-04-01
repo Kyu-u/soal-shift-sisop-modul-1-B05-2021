@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # masuk ke directory
-cd /home/yoursemicolon/Documents/sisop-2021/modul-1/soal-shift-modul-1-B05-2021/soal3
+cd ~/soal-shift-sisop-modul-1-B05-2021/soal3
 
 yesterdayDate=$(date -d yesterday +"%d-%m-%Y")
 currentDate=$(date +"%d-%m-%Y")
