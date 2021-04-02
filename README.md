@@ -32,6 +32,7 @@ Dikerjakan oleh Kelompok B05
 **Perintah** <br>
 Pada soal 3a, diperintahkan untuk mengunduh 23 gambar dari https://loremflickr.com/320/240/kitten dan menyimpan log-nya ke file ```Foto.log```. Jika ada gambar yang sama maka harus dihapus dan tidak perlu mengunduh gambar lagi untuk menggantinya. Gambar-gambar tersebut disimpan dengan nama ```Koleksi_XX``` berurutan tanpa ada nomor yang hilang (contoh: Koleksi_01, Koleksi_02, dst).
 
+<a name="sc3a"></a>
 **Source code 3a**
 ```shell script
 #!/bin/bash
@@ -81,6 +82,7 @@ cd ~/soal-shift-sisop-modul-1-B05-2021/soal3
 
 Variabel ```count``` digunakan untuk men-tracking jumlah file yang telah ada di dalam directory (dengan catatan tidak ada file yang sama).
 
+<a name="langkah-3a"></a>
 Berikut langkah penyelesaian untuk soal 3a:
 1. Dilakukan proses iterasi sebanyak 23 kali untuk mengunduh 23 file gambar.
     ```shell script 
@@ -122,7 +124,7 @@ Berikut langkah penyelesaian untuk soal 3a:
 <a name="soal3b"></a>
 ### Soal 3b
 **Perintah** <br>
-Jalankan script [soal 3a](#soal3a) dengan cronjob **sehari sekali pada jam 8 malam** dan **tanggal 2 empat hari sekali**. Masukkan file unduh beserta ```Foto.log``` ke folder dengan nama sesuai tanggal unduh dengan format ```DD-MM-YYYY```.
+Jalankan script [soal 3a](#sc3a) dengan cronjob **sehari sekali pada jam 8 malam** dan **tanggal 2 empat hari sekali**. Masukkan file unduh beserta ```Foto.log``` ke folder dengan nama sesuai tanggal unduh dengan format ```DD-MM-YYYY```.
 
 **Source code**
 ```shell script
@@ -150,22 +152,182 @@ mv Foto.log "./$newDir"
 ```
 
 **Penyelesaian** <br>
-Buat directory baru ```mkdir``` dengan format penamaan sesuai dengan tanggal unduh. Untuk mendapatkan tanggal unduh, gunakan command ```date``` dalam hal ini dengan statement ```newDir=$(date +"%d-%m-%Y")```. Jalankan [soal 3a](#soal3a) dengan ```bash```. Kemudian pindahkan ```mv``` seluruh file unduh serta ```Foto.log``` ke directory ```newDir```. Untuk cron-nya,
+Buat directory baru ```mkdir``` dengan format penamaan sesuai dengan tanggal unduh. Untuk mendapatkan tanggal unduh, gunakan command ```date``` dalam hal ini dengan statement ```newDir=$(date +"%d-%m-%Y")```. Jalankan [soal 3a](#sc3a) dengan ```bash```. Kemudian pindahkan ```mv``` seluruh file unduh serta ```Foto.log``` ke directory ```newDir```. Untuk cron-nya,
 ```shell script
 0 20 1-31/7,2-31/4 * * /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3b.sh
 ```
-**Dari paling kiri** <br>
+**Dari kiri ke kanan** <br>
 - 0 artinya cron dijalankan tiap menit 0 <br>
 - 20 artinya cron dijalankan tiap jam 20:00 <br>
 - 1-31/7 artinya cron dijalankan tiap 7 hari sekali, mulai dari tanggal 1 hingga tanggal 31 <br>
 - 2-31/4 artinya cron dijalankan tiap 4 hari sekali, mulai dari tanggal 2 hingga tanggal 31 <br>
 - \* \* artinya setiap bulan dan setiap hari <br>
 
-
-
-
+<a name="soal3c"></a>
 ### Soal 3c
+**Perintah** <br>
+Undur juga gambar kelinci dari https://loremflickr.com/320/240/bunny. Gambar kucing dan kelinci diundah secara bergantian setiap hari. Nama folder diberi awalan ```Kucing_DD-MM-YYYY``` atau ```Kelinci_DD-MM-YYYY``` dengan ```DD-MM-YYYY``` adalah tanggal unduh.
 
+**Source Code**
+```shell script
+#!/bin/bash
+
+# masuk ke directory
+cd ~/soal-shift-sisop-modul-1-B05-2021/soal3
+
+yesterdayDate=$(date -d yesterday +"%d-%m-%Y")
+currentDate=$(date +"%d-%m-%Y")
+
+# cek file yang di download kemarin
+if [ -d "Kelinci_$yesterdayDate" ]
+then
+	flag=0
+	directoryName="Kucing_$currentDate"
+else
+	flag=1
+	directoryName="Kelinci_$currentDate"
+fi
+
+# download file
+# untuk menghitung file yang sudah ada di directory
+count=1
+
+for ((i=1; i<=23; i=i+1))
+do
+	if [ $flag -eq 0 ]
+	then
+		 wget -O "Koleksi_$count.jpg" -a "Foto.log" https://loremflickr.com/320/240/kitten
+	else
+		wget -O "Koleksi_$count.jpg" -a "Foto.log" https://loremflickr.com/320/240/bunny
+	fi
+
+        # cek apakah ada yang sama
+        for ((j=1; j<count; j=j+1))
+        do
+                check=$(cmp --silent "./Koleksi_$j.jpg" "./Koleksi_$count.jpg")
+                status=$?
+                if [ $status -eq 0 ]
+                then
+                        # menghapus file yang sama
+                        rm "./Koleksi_$count.jpg"
+                        (( count-- ))
+                        break
+                fi
+        done
+        (( count++ ))
+done
+
+# rename file untuk Koleksi_01..Koleksi_09
+for i in {1..9}
+do
+        if [ -e "./Koleksi_$i.jpg" ]
+        then
+                mv "Koleksi_$i.jpg" "Koleksi_0$i.jpg"
+        fi
+done
+
+# buat directory baru dan pindahkan file
+mkdir "$directoryName"
+mv *.jpg "./$directoryName"
+mv Foto.log "./$directoryName"
+```
+
+**Penyelesaian** <br>
+Berikut adalah langkah penyelesaian soal 3c.
+1. Karena tidak ada aturan urutan yang harus diunduh terlebih dahulu, maka disini kita unduh file kelinci di hari pertama. Untuk menentukan file yang diunduh di hari selanjutnya, cek nama folder yang diunduh kemarin (disini kita cek dengan folder kelinci).
+	```shell script
+	if [ -d "Kelinci_$yesterdayDate" ]
+	```
+	Jika ditemukan folder dengan nama ```Kelinci_$yesterdayDate```, maka hari ini kita akan mengunduh file kucing. Sebaliknya, jika tidak ada maka unduh file kelinci.
+2. Buat folder baru dengan format ```Kucing_$currentDate``` atau ```Kelinci_$currentDate```.
+3. Untuk proses selanjutnya, sama dengan [langkah penyelesaian soal 3a](langkah-3a). Yang berbeda hanyalah link website yang harus disesuaikan dengan file yang hari itu diunduh.
+	```shell script
+	if [ $flag -eq 0 ]
+		then
+	    # unduh file kucing
+			 wget -O "Koleksi_$count.jpg" -a "Foto.log" https://loremflickr.com/320/240/kitten
+		else
+	    # unduh file kelinci
+			wget -O "Koleksi_$count.jpg" -a "Foto.log" https://loremflickr.com/320/240/bunny
+		fi
+	```
+
+<a name="soal3d"></a>
 ### Soal 3d
+**Perintah** <br>
+Pindahkan seluruh folder ke zip dengan nama ```Koleksi.zip``` dan beri password berupa tanggal hari ini dengan format ```MMDDYYYYY```.
 
+**Source Code**
+```shell script
+#!/bin/bash
+
+# masuk ke directory
+cd ~/soal-shift-sisop-modul-1-B05-2021/soal3
+
+# setting password
+settingPassword=$(date +"%m%d%Y")
+
+# zip file
+zip -q -r -P "$settingPassword" -m Koleksi.zip Kucing_* Kelinci_*
+```
+
+**Penyelesaian** <br>
+Gunakan command ```zip``` untuk men-zip folder ```Kucing_*``` dan ```Kelinci_*```. ```-q``` untuk menyembunyikan output dari ketika proses men-zip file. ```-r``` untuk mengarsipkan folder dan seluruh folder. ```-m``` untuk memindahkan folder ```Kucing_*``` dan ```Kelinci_*``` ke file ```Koleksi.zip```. ```-P``` atau ```--password``` untuk memberi password pada file ```Koleksi.zip``` berupa tanggal hari ini dengan format ```MMDDYYYY```.
+
+<a name="soal3e"></a>
 ### Soal 3e
+**Perintah** <br>
+```zip``` file saat kuliah saja, yaitu jam 7 pagi sampai 6 sore dan file ter-```unzip``` saat tidak kuliah serta tidak ada file ```zip``` sama sekali.
+
+**Source Code** <br>
+```shell script
+#!/bin/bash
+
+# masuk ke directory
+cd /home/yoursemicolon/Documents/sisop-2021/modul-1/soal-shift-modul-1-B05-2021/soal3
+
+# setting password
+setPassword=$(date +"%m%d%Y")
+
+# unzip file
+unzip -P "$setPassword" Koleksi.zip
+
+# hapus file zip
+rm "./Koleksi.zip"
+```
+
+**Crontab**
+```shell script
+# zip saat kuliah
+0 7 * * 1-5 /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3d.sh
+
+# unzip saat tidak kuliah
+0 18 * * 1-5 /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3e.sh
+```
+
+**Penyelesaian** <br>
+Untuk membuat file ter-```zip``` dan ter-```unzip``` secara otomatis pada jam kuliah, kita menggunakan ```cronjob```. Crontab untuk men-```zip``` file:
+```shell script
+# zip saat kuliah
+0 7 * * 1-5 /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3d.sh
+```
+**Dari kiri ke kanan**
+- 0 artinya zip pada menit ke nol
+- 7 artinya pada jam 07:00
+- \* \* artinya setiap hari dan setiap bulan
+- 1-5 artinya pada weekdays atau senin-jumat
+
+Untuk meng-```unzip``` file, gunakan command ```unzip -P```. ```-P``` atau ```--password``` untuk mengekstrak file ```zip``` yang mempunyai password. Kemudian, hapus file zip dengan ```rm```. Untuk crontabnya:
+```shell script
+# unzip saat tidak kuliah
+0 18 * * 1-5 /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3e.sh
+```
+**Dari kiri ke kanan**
+- 0 artinya unzip pada menit ke nol
+- 18 artinya pada jam 18:00
+- \* \* artinya setiap hari dan setiap bulan
+- 1-5 artinya pada weekdays atau senin-jumat
+
+**Kendala dalam pengerjaan soal 3**
+1. Belum mengerti bagaimana cara menjalankan cronjob sehingga belum bisa mengecek kebenaran pengerjaan soal 3b dan 3e. Solusinya adalah ubah setting waktu pada linux dengan referensi berikut https://www.youtube.com/watch?v=HUX8pMEEj9g.
+2. Belum paham mengenai command-command pada terminal. Solusinya adalah membaca banyak referensi, salah satunya https://linuxize.com/post/how-to-zip-files-and-directories-in-linux/.
