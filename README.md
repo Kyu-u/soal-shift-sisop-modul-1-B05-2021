@@ -18,10 +18,133 @@ Dikerjakan oleh Kelompok B05
 
 <a name="soal1"></a>
 ## Soal 1
-Ryujin baru saja diterima sebagai IT support di perusahaan Bukapedia. Dia diberikan tugas untuk membuat laporan harian untuk aplikasi internal perusahaan, ticky. Terdapat 2 laporan yang harus dia buat, yaitu laporan daftar peringkat pesan error terbanyak yang dibuat oleh ticky dan laporan penggunaan user pada aplikasi ticky.
+Ryujin baru saja diterima sebagai IT support di perusahaan Bukapedia. Dia diberikan tugas untuk membuat laporan harian untuk aplikasi internal perusahaan, ticky. Terdapat 2 laporan yang harus dia buat, yaitu laporan daftar peringkat pesan error terbanyak yang dibuat oleh ticky dan laporan penggunaan user pada aplikasi ticky. <br>
 
-**Soal 1a**
+**Soal 1a** <br>
 Kumpulkan informasi dari file ```syslog.log```. Informasi yang diperlukan antara lain: jenis log (ERROR/INFO), pesan log, dan username pada setiap baris lognya. <br>
+
+**Source Code dan Penjelasan** <br>
+```
+grep -o "[E|I].*" syslog.log
+```
+
+Penyelesaian soal ini menggunakan regex ```"[E|I].*"``` yang bermaksud untuk memfilter line yang mengandung ```E``` atau ```I``` dan ```.*``` berarti hingga akhir.<br>
+Dengan menggunakan ```grep -o``` hanya bagian line yang mengandung pattern akan ditampilkan.<br>
+
+**Soal 1b** <br>
+Tampilkan semua pesan error yang muncul beserta jumlah kemunculannya. <br>
+
+**Source Code dan Penjelasan** <br>
+```
+grep -o "ERROR.*" syslog.log | cut -d "(" -f1 | rev | cut -d "R" -f1 | rev | sort | uniq -c
+```
+
+Sama seperti soal 1a, di sini menggunakan ```grep -o "ERROR.*"``` untuk memfilter line yang mengandung ```ERROR``` di depan. <br>
+Kemudian menggunakan ```cut``` dengan delimiter ```-d "("``` untuk memisahkan line menjadi 2 field dan dengan adanya ```-f1```, ```cut``` akan memotong field pertama, yaitu field yang berisi ```<username>```. <br>
+Untuk menghapus kata ```ERROR```, pertama digunakan ```rev``` untuk mereverse line sehingga ketika menggunakan ```cut -d "R" -f1``` kata tersebut berada di field 1. Kemudian direverse ke keadaan semula. <br>
+Kemudian disort dan kemunculan unik dihitung dengan ```uniq -c```. <br>
+
+**Soal 1c dan 1e** <br>
+Tampilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya.<br>
+
+Semua informasi yang didapatkan pada poin b dituliskan ke dalam file error_message.csv dengan header Error,Count yang kemudian diikuti oleh daftar pesan error dan jumlah kemunculannya diurutkan berdasarkan jumlah kemunculan pesan error dari yang terbanyak. <br>
+
+**Source Code dan Penjelasan**
+```
+tr ' ' '\n' < syslog.log > temp.txt
+
+grep -o "(.*)" temp.txt| tr -d  "(" | tr -d ")" | sort | uniq >> temp2.txt
+
+while read user
+do
+	error=$(grep "ERROR.*($user)" syslog.log | wc -l)
+	info=$(grep "INFO.*($user)" syslog.log | wc -l)
+	echo "$user, INFO:$info, ERROR:$error"
+	printf "%s,%d,%d\n" $user $info $error >> user_statistic.csv
+done < temp2.txt
+
+sed -i '1i Username,INFO,ERROR' user_statistic.csv
+```
+Pertama gunakan ```tr ' ' '\n' < syslog.log > temp.txt``` untuk mereplace semua spasi dalam file ```syslog.log``` dengan new line ```\n``` dengan output ke dalam file temp.txt. <br>
+Kemudian dalam file baru mencari semua username dengan memfilter dengan ```grep -o "(.*)"```. <br>
+```tr -d  "(" | tr -d ")"``` akan menghapus ```(``` dan ```)``` dari file sehingga hanya tersisa username dalam file. <br>
+Setelah itu sort secara alphabet dengan ```sort | uniq```. Ini juga akan menghilangkan semua duplikat nama. <br>
+
+```
+while read user
+do
+	error=$(grep "ERROR.*($user)" syslog.log | wc -l)
+	info=$(grep "INFO.*($user)" syslog.log | wc -l)
+	echo "$user, INFO:$info, ERROR:$error"
+	printf "%s,%d,%d\n" $user $info $error >> user_statistic.csv
+done < temp2.txt
+```
+Bagian code ini akan melakukan iterasi melalui file ```temp2.txt``` yang berisi username dan untuk setiap user (line) akan menyimpan banyak kemunculan ke dalam variable. <br>
+```
+error=$(grep "ERROR.*($user)" syslog.log | wc -l)
+info=$(grep "INFO.*($user)" syslog.log | wc -l)
+```
+Kemudian untuk setiap user akan ditampilkan kemunculan error dan info, serta dimasukkan ke dalam file ```user_statistic.csv```. <br>
+```
+echo "$user, INFO:$info, ERROR:$error"
+printf "%s,%d,%d\n" $user $info $error >> user_statistic.csv
+```
+Terakhir, sesuai dengan format, tambahkan ```User,Info,Error``` ke line pertama ```user_statistic.csv```. <br>
+```
+sed -i '1i Username,INFO,ERROR' user_statistic.csv
+```
+**Soal 1d** <br>
+Semua informasi yang didapatkan pada poin b dituliskan ke dalam file error_message.csv dengan header Error,Count yang kemudian diikuti oleh daftar pesan error dan jumlah kemunculannya diurutkan berdasarkan jumlah kemunculan pesan error dari yang terbanyak. <br>
+
+**Source Code dan Penjelasan** <br>
+```
+permission=$(grep "Permission denied while closing ticket" syslog.log | wc -l)
+noticket=$(grep "Ticket doesn't exist" syslog.log | wc -l)
+tried=$(grep "Tried to add information to closed ticket" syslog.log | wc -l)
+timeout=$(grep "Timeout while retrieving information" syslog.log | wc -l)
+connectionfailed=$(grep "Connection to DB failed" syslog.log | wc -l)
+modified=$(grep "The ticket was modified while updating" syslog.log | wc -l)
+
+#echo nama error beserta jumlah occurencenya ke dalam file error_message
+echo -n  "Permission denied while closing ticket, " >> error_message.csv
+echo   $permission >> error_message.csv
+echo -n  "Ticket doesn't exist, " >> error_message.csv
+echo  $noticket >> error_message.csv
+echo -n "Tried to add information to closed ticket, " >> error_message.csv
+echo  $tried >> error_message.csv
+echo -n "Timeout while retrieving information, " >> error_message.csv
+echo  $timeout >> error_message.csv
+echo -n "Connection to DB failed, " >> error_message.csv
+echo  $connectionfailed >> error_message.csv
+echo -n "The ticket was modified while updating, " >> error_message.csv
+echo  $modified >> error_message.csv
+cat error_message.csv
+#gunakan ',' sebagai delimiter dan pisahkan string menjadi 2 field berdasarkan delimiter tersebut
+#order column ke 2 yang berisi angka secara numeric reverse
+sort -t, -k 2 -nr -o error_message.csv error_message.csv
+
+#tambahkan Error,Count di awal file
+sed -i '1i Error,Count' error_message.csv
+```
+
+Untuk setiap jenis pesan error simpan ke dalam variabel untuk menghitung banyaknya muncul. <br>
+```
+permission=$(grep "Permission denied while closing ticket" syslog.log | wc -l)
+noticket=$(grep "Ticket doesn't exist" syslog.log | wc -l)
+tried=$(grep "Tried to add information to closed ticket" syslog.log | wc -l)
+timeout=$(grep "Timeout while retrieving information" syslog.log | wc -l)
+connectionfailed=$(grep "Connection to DB failed" syslog.log | wc -l)
+modified=$(grep "The ticket was modified while updating" syslog.log | wc -l)
+```
+Kemudian echo semua variabel ke dalam file ```error_message.csv```. <br>
+```-n``` akan melakukan echo tanpa new line.
+Setelah itu, untuk melakukan mengurutkan angka dari besar ke kecil digunakan ```sort```. <br>
+```-t,``` akan memisahkan line berdasarkan delimiter ```,``` dan akan diurutkan berdasarkan ```k 2``` yaitu kolom ke-2 setelah dipisahkan <br> dan ```-nr``` untuk mengurutkan dari besar ke kecil. <br>
+Yang terakhir, gunakan ```sed -i '1i Error,Count' error_message.csv``` untuk menambahkan ```Error,Count``` ke line pertama file. <br>
+
+
+
+
 
 
 
