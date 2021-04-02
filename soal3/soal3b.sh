@@ -8,8 +8,7 @@ newDir=$(date +"%d-%m-%Y")
 mkdir "$newDir"
 
 # jalankan soal 3a
-bash `pwd`/soal3a.sh
-#bash soal3a.sh
+bash soal3a.sh
 
 # pindahkan semua file ke directory baru
 mv *.jpg "./$newDir"
