@@ -456,6 +456,12 @@ Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedi
 
 Pada soal 2e, diminta untuk membuat sebuah file txt bernama hasil.txt yang gunanya untuk menyimpan hasil script dari soal 2a, 2b, 2c, dan 2d. Berikut adalah isi dari file hasil.txt :
 
+![hasil txt ss](https://user-images.githubusercontent.com/72669398/113424222-f7e43500-93f9-11eb-9f63-6ed6100bc608.jpg)
+
+Gambar diatas merupakan output yang keluar pada hasil.txt menggunakan Linux Amanda. Karena ketika menggunakan milik saya tidak muncul output nomor 2a namun untuk nomor 2b, 2c dan 2d keluar seperti dibawah ini :
+
+
+
 
 <a name="soal3"></a>
 ## Soal 3
