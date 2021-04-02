@@ -32,7 +32,7 @@ Karena kamu diminta untuk mencari beberapa kesimpulan yang ada pada soal nomor 2
 Pada nomor 2a, Steven ingin mengapresiasi kinerja karyawannya selama ini dengan mengetahui **Row ID** dan **profit percentage** terbesar (jika hasil profit percentage terbesar lebih dari 1, maka ambil Row ID yang paling besar). Karena kamu bingung, Clemong memberikan definisi dari *profit percentage*, yaitu: <br>
 ```Profit Persentage = (Profit/Cost Price)x100```
 
-**Source Code dan Penjelasan**
+**Source Code dan Penjelasan** <br>
 ```
 export LC_ALL=C
 awk '
@@ -111,10 +111,10 @@ Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahka
 /Users/nadiatiara/praktikum_sisop/soal2/Laporan-TokoShiSop.tsv > hasil.txt
 ```
 
-**Nomor 2b**
+**Nomor 2b** <br>
 Clemong memiliki rencana promosi di Albuquerque menggunakan metode MLM. Oleh karena itu, Clemong membutuhkan daftar **nama customer pada transaksi tahun 2017 di Albuquerque**.
 
-**Source Code dan Penjelasan**
+**Source Code dan Penjelasan** <br>
 ```
 awk 'BEGIN {FS="\t"}
 {
@@ -163,10 +163,10 @@ print "Daftar nama customer di Albuquerque pada tahun 2017 antara lain:"
 }'/Users/nadiatiara/praktikum_sisop/soal2/Laporan-TokoShiSop.tsv >> hasil.txt
 ```
 
-**Nomor 2c**
+**Nomor 2c** <br>
 TokoShiSop berfokus tiga segment customer, antara lain: Home Office, Customer, dan Corporate. Clemong ingin meningkatkan penjualan pada segmen customer yang paling sedikit. Oleh karena itu, Clemong membutuhkan **segment customer** dan **jumlah transaksinya yang paling sedikit**.
 
-**Source Code dan Penjelasan**
+**Source Code dan Penjelasan** <br>
 
 ```
 export LC_ALL=C #buat mesin baca (.) jadi desimal
@@ -227,10 +227,10 @@ Lalu, akan dilakukan pencetakan variabel SegMin dan Min sesuai format soal shift
  printf ("Tipe segmen customer yang penjualannya paling sedikit adalah %s dengan %d transaksi.\n", SegMin, Min)
 ```
 
-**Nomor 2d**
+**Nomor 2d** <br>
 TokoShiSop membagi wilayah bagian (region) penjualan menjadi empat bagian, antara lain: Central, East, South, dan West. Manis ingin mencari **wilayah bagian (region) yang memiliki total keuntungan (profit) paling sedikit** dan **total keuntungan wilayah tersebut**.
 
-**Source Code dan Penjelasan**
+**Source Code dan Penjelasan** <br>
 ```
 export LC_ALL=C #buat mesin baca (.) jadi desimal
 awk '
@@ -298,13 +298,15 @@ Lalu, akan dilakukan pencetakan variabel RegMin dan UntungMin sesuai format soal
 }'
 ```
 
-**Nomor 2e**
+**Nomor 2e** <br>
 Agar mudah dibaca oleh Manis, Clemong, dan Steven, (e) kamu diharapkan bisa membuat sebuah script yang akan menghasilkan file “hasil.txt” yang memiliki format sebagai berikut:
 
 
 Transaksi terakhir dengan profit percentage terbesar yaitu *ID Transaksi* dengan persentase *Profit Percentage*%.
 
 ```
+Transaksi terakhir dengan profit percentage terbesar yaitu *ID Transaksi* dengan persentase *Profit Percentage*%.
+
 Daftar nama customer di Albuquerque pada tahun 2017 antara lain:
 *Nama Customer1*
 *Nama Customer2* dst
