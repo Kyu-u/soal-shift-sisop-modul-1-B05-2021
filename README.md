@@ -57,6 +57,20 @@ END{
 ' /Users/nadiatiara/praktikum_sisop/soal2/Laporan-TokoShiSop.tsv > hasil.txt
 ```
 
+Penyelesaian soal nomor 2 ini menggunakan 
+
+```awk ‘ ‘```
+
+Fungsi dasar **awk** adalah untuk mencari pola pada file per baris (atau unit teks lain) yang berisi pola tertentu. Ketika suatu baris sesuai dengan pola, awk melakukan aksi yang khusus pada baris tersebut Sehingga awk di import pada awal **shell script**. Karena file ```Laporan-TokoShisop.tsv``` berformaat **tsv(tab-separated value)** atau File nilai yang dipisahkan tab agar bisa membaca data antar kolom, maka digunakanlah 
+
+```BEGIN {FS=”\t”}```
+
+Kemudian, 
+
+```export LC_ALL=C```
+
+berfungsi untuk membaca titik (.) menjadi desimal pada file ```Laporan-TokoShisop.tsv ```. 
+
 
 <a name="soal3"></a>
 ## Soal 3
