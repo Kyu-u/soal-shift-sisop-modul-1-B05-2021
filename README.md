@@ -26,7 +26,11 @@ Steven dan Manis mendirikan sebuah startup bernama **“TokoShiSop”**. Sedangk
 
 Tiap tahunnya, TokoShiSop mengadakan Rapat Kerja yang membahas bagaimana hasil penjualan dan strategi kedepannya yang akan diterapkan. Kamu sudah sangat menyiapkan sangat matang untuk raker tahun ini. Tetapi tiba-tiba, Steven, Manis, dan Clemong meminta kamu untuk mencari beberapa kesimpulan dari data penjualan ```“Laporan-TokoShiSop.tsv”.```
 
-Karena kamu diminta untuk mencari beberapa kesimpulan yang ada pada soal nomor 2 dari data penjualan yang berformat file tsv (tab-separated values/file nilai yang dipisahkan oleh tab) bernama ```Laporan-TokoShisop.tsv``` . Kemudian, terdapat 4 perintah soal yang terbagi menjadi 2a, 2b, 2c, dan 2d di dalam script ```soal2_generate_laporan_ihir_shisop.sh``` . Lalu, hasil yang akan dtampilakan pada ```hasil.txt``` . 
+Karena kamu diminta untuk mencari beberapa kesimpulan yang ada pada soal nomor 2 dari data penjualan yang berformat file tsv (tab-separated values/file nilai yang dipisahkan oleh tab) bernama ```Laporan-TokoShisop.tsv``` . Kemudian, terdapat 4 perintah soal yang terbagi menjadi 2a, 2b, 2c, dan 2d di dalam script ```soal2_generate_laporan_ihir_shisop.sh``` . Lalu, hasil yang akan dtampilakan pada ```hasil.txt``` . <br>
+**Nomor 2a** <br>
+Pada nomor 2a, Steven ingin mengapresiasi kinerja karyawannya selama ini dengan mengetahui **Row ID** dan **profit percentage** terbesar (jika hasil profit percentage terbesar lebih dari 1, maka ambil Row ID yang paling besar). Karena kamu bingung, Clemong memberikan definisi dari *profit percentage*, yaitu: <br>
+```Profit Persentage = (Profit/Cost Price)x100```
+
 
 
 <a name="soal3"></a>
