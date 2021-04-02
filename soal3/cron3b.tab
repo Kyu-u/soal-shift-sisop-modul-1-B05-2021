@@ -1,2 +1,4 @@
-0 20 1-31/7,2-31/4 * * /bin/bash /home/yoursemicolon/Documents/sisop-2021/modul-1/soal-shift-modul-1-B05-2021/Soal3/soal3b.sh
+# execute soal3b.sh
+
+0 20 1-31/7,2-31/4 * * /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3b.sh
 
