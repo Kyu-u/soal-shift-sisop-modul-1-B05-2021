@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # masuk ke directory
-cd /home/yoursemicolon/Documents/sisop-2021/modul-1/soal-shift-modul-1-B05-2021/soal3
+cd ~/soal-shift-sisop-modul-1-B05-2021/soal3
 
 # setting password
-setPassword=$(date +"%d%m%Y")
+settingPassword=$(date +"%m%d%Y")
 
 # zip file
-zip -P "$setPassword" Koleksi.zip Kucing_* Kelinci_*
+zip -q -r -P "$settingPassword" -m Koleksi.zip Kucing_* Kelinci_*
