@@ -1,5 +1,20 @@
 #!/bin/bash
 
+
+# REVISI
+
+#1a
+
+grep -o "[E|I].*" syslog.log 
+
+#1b
+
+grep -o "ERROR.*" syslog.log | cut -d "(" -f1 | rev | cut -d "R" -f1 | rev | sort | uniq -c
+
+
+
+
+
 #simpan semua occurence error ke dalam variable
 permission=$(grep "Permission denied while closing ticket" syslog.log | wc -l)
 noticket=$(grep "Ticket doesn't exist" syslog.log | wc -l)
