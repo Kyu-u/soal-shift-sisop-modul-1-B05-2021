@@ -161,7 +161,7 @@ Pada nomor 2a, Steven ingin mengapresiasi kinerja karyawannya selama ini dengan 
 ```Profit Persentage = (Profit/Cost Price)x100```
 
 **Source Code dan Penjelasan** <br>
-```
+```bash
 export LC_ALL=C
 awk '
 BEGIN {FS="\t"; KeuntunganMaks=0} 
@@ -195,7 +195,9 @@ Fungsi dasar **awk** adalah untuk mencari pola pada file per baris (atau unit te
 
 Kemudian, 
 
-```export LC_ALL=C```
+```bash
+export LC_ALL=C
+```
 
 berfungsi untuk membaca titik (.) menjadi desimal pada file ```Laporan-TokoShisop.tsv ```. 
 
@@ -209,11 +211,13 @@ Kemudian hal yang dilakukan yaitu menghitung profit percentage menggunakan rumus
 
 dimana costprice itu adalah ```(sales-profit)```. Kolom profit berada di kolom 21 atau``` $21``` , sedangkan kolom sales berada di kolom 18 atau ``` $18```. 
 
-``` ID_Baris=$1```
+``` bash
+ID_Baris=$1
+```
 
 Variabel diatas, berfungsi untuk menyimpan argumen pertama yaitu kolom 1 atau row ID yang berada pada file Laporan-TokoShisop.tsv .
 
-```
+``` bash
 if (KeuntunganMaks<=PersentaseKeuntungan)
         {
             IDmaks=ID_Baris 
@@ -225,7 +229,7 @@ Pada proses diatas setiap barisnya akan dilakukan perbandingan yaitu PersentaseK
 
 Lalu, akan dilakukan pencetakan variabel IDmaks dan KeuntunganMaks sesuai format soal shift modul.
 
-```
+``` bash
 {
     printf("Transaksi terakhir dengan profit percentage terbesar yaitu %s dengan persentase %d\n")
     #print "Transaksi terakhir dengan profit percentage terbesar yaitu ", IDmaks, " dengan persentase ", KeuntunganMaks, "%\n"
@@ -243,7 +247,7 @@ Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahka
 Clemong memiliki rencana promosi di Albuquerque menggunakan metode MLM. Oleh karena itu, Clemong membutuhkan daftar **nama customer pada transaksi tahun 2017 di Albuquerque**.
 
 **Source Code dan Penjelasan** <br>
-```
+``` bash
 awk 'BEGIN {FS="\t"}
 {
     NamaCust=$7
@@ -269,7 +273,7 @@ END{
 
 Sama seperti nomor 2a, pada nomor 2b ini sama menggunakan awk.
 
-```
+``` bash
 if ($2~"2017" && ($10=="Albuquerque")) 
     {
         pelanggan[NamaCust]+=1 
@@ -280,7 +284,7 @@ kondisi diatas dilakukan untuk mencari nama customer yang melalakukan transaksi 
 
 Lalu, akan dilakukan pencetakan sesuai format soal shift modul. Iterasi semua nilai pada array pelanggan untuk menampilkan NamaPelanggan. Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahkan ke file hasil.txt sebagai tempat keluarnya output.
 
-```
+``` bash
 print "Daftar nama customer di Albuquerque pada tahun 2017 antara lain:"
     for (NamaPelanggan in pelanggan)
     {
@@ -296,7 +300,7 @@ TokoShiSop berfokus tiga segment customer, antara lain: Home Office, Customer, d
 
 **Source Code dan Penjelasan** <br>
 
-```
+``` bash
 export LC_ALL=C #buat mesin baca (.) jadi desimal
 awk 'BEGIN {FS="\t"}
 {
@@ -324,7 +328,7 @@ END{
 
 Sama seperti nomor 2a, pada nomor 2c ini sama menggunakan ```awk``` dan``` LC_ALL=C```.
 
-```
+``` bash
 if (NR!=1) 
    {
        segment[$8]+=1
@@ -335,7 +339,7 @@ Kondisi diatas digunakan untuk menghitung banyaknya segment. ```NR!=1``` maksudn
 
 Kemudian, ```Min=5000 ```digunakan sebagai pembanding pertama agar data selanjutnya bisa berubah. Iterasi dibawah ini dilakukan untuk mengecek element disetiap segment untuk mencari segment customer dan jumlah transaksi paling sedikit. Jika jumlah transaksi dari segment lebih kecil dibandingkan Min, maka array ```segment[x]``` dan index ```[x] ```akan tersimpan pada variabel Min dan SegMin.
 
-```
+``` bash
 {
    Min=5000
  
@@ -351,7 +355,7 @@ Kemudian, ```Min=5000 ```digunakan sebagai pembanding pertama agar data selanjut
 
 Lalu, akan dilakukan pencetakan variabel SegMin dan Min sesuai format soal shift modul. Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahkan ke file hasil.txt sebagai tempat keluarnya output.
 
-```
+``` bash
  printf ("Tipe segmen customer yang penjualannya paling sedikit adalah %s dengan %d transaksi.\n", SegMin, Min)
 ```
 
@@ -359,7 +363,7 @@ Lalu, akan dilakukan pencetakan variabel SegMin dan Min sesuai format soal shift
 TokoShiSop membagi wilayah bagian (region) penjualan menjadi empat bagian, antara lain: Central, East, South, dan West. Manis ingin mencari **wilayah bagian (region) yang memiliki total keuntungan (profit) paling sedikit** dan **total keuntungan wilayah tersebut**.
 
 **Source Code dan Penjelasan** <br>
-```
+``` bash
 export LC_ALL=C #buat mesin baca (.) jadi desimal
 awk '
 BEGIN{FS="\t"}
@@ -392,7 +396,7 @@ END{
 
 Sama seperti nomor 2a dan 2c, pada nomor 2d ini sama menggunakan ```awk``` dan ```LC_ALL=C```.
 
-```
+``` bash
 if (1!=NR)
    {
        Region[reg]+=profit
@@ -403,7 +407,7 @@ Kondisi diatas mirip seperti dengan 2c. ```NR!=1``` maksudnya adalah untuk memba
 
 Kemudian, ```UntungMin=999999``` nilai UntungMin harus lebih besar dari keuntungan dari masing-masing region agar nilainya bisa terproses. Iterasi dibawah ini dilakukan untuk mencari region dengan total keuntungan paling sedikit dengan menghitung setiap total keuntungan masing-masing region pada array Region. Apabila total keuntungan pada suatu region lebih kecil maka ```Region[x]``` dan index ```[x]``` akan tersimpan pada variabel ```regMin``` dan ```UntungMin```. 
 
-```
+``` bash
 {
    UntungMin=999999
    for (x in Region)
@@ -420,7 +424,7 @@ Kemudian, ```UntungMin=999999``` nilai UntungMin harus lebih besar dari keuntung
 
 Lalu, akan dilakukan pencetakan variabel RegMin dan UntungMin sesuai format soal shift modul. Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahkan ke file hasil.txt sebagai tempat keluarnya output.
  
-```
+``` bash
  printf ("\nWilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah %s dengan total keuntungan %.1f", regMin, UntungMin)
    printf ("\n\n")
 }'
