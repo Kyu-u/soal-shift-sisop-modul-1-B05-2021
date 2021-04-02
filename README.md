@@ -71,6 +71,46 @@ Kemudian,
 
 berfungsi untuk membaca titik (.) menjadi desimal pada file ```Laporan-TokoShisop.tsv ```. 
 
+```KeuntunganMaks=0```
+
+KeuntunganMaks dipakai sebagai perbandingan untuk membandingkan persentase keuntungan maksimum setiap baris data yang ada di file ```Laporan-TokoShisop.tsv``` .
+
+Kemudian hal yang dilakukan yaitu menghitung profit percentage menggunakan rumus yang tersedia pada soal shift modul 1 yaitu
+
+```Profit Persentage = (Profit/Cost Price)x100```
+
+dimana costprice itu adalah ```(sales-profit)```. Kolom profit berada di kolom 21 atau``` $21``` , sedangkan kolom sales berada di kolom 18 atau ``` $18```. 
+
+``` ID_Baris=$1```
+
+Variabel diatas, berfungsi untuk menyimpan argumen pertama yaitu kolom 1 atau row ID yang berada pada file Laporan-TokoShisop.tsv .
+
+```
+if (KeuntunganMaks<=PersentaseKeuntungan)
+        {
+            IDmaks=ID_Baris 
+            KeuntunganMaks=PersentaseKeuntungan
+        }
+```
+
+Pada proses diatas setiap barisnya akan dilakukan perbandingan yaitu PersentaseKeuntungan akan lebih besar dari pada KeuntunganMaks kemudian nantinya akan tersimpan pada variabel KeuntunganMaks. IDmaks digunakan untuk menyimpan ID_Baris atau Row_ID yang berada pada kolom satu yang paling besar.
+
+Lalu, akan dilakukan pencetakan variabel IDmaks dan KeuntunganMaks sesuai format soal shift modul.
+
+```
+{
+    printf("Transaksi terakhir dengan profit percentage terbesar yaitu %s dengan persentase %d\n")
+    #print "Transaksi terakhir dengan profit percentage terbesar yaitu ", IDmaks, " dengan persentase ", KeuntunganMaks, "%\n"
+}
+'
+
+Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahkan ke file hasil.txt sebagai tempat keluarnya output.
+
+```
+/Users/nadiatiara/praktikum_sisop/soal2/Laporan-TokoShiSop.tsv > hasil.txt
+```
+
+
 
 <a name="soal3"></a>
 ## Soal 3
