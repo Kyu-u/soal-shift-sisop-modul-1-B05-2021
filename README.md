@@ -97,12 +97,11 @@ Pada proses diatas setiap barisnya akan dilakukan perbandingan yaitu PersentaseK
 
 Lalu, akan dilakukan pencetakan variabel IDmaks dan KeuntunganMaks sesuai format soal shift modul.
 
-```
 {
     printf("Transaksi terakhir dengan profit percentage terbesar yaitu %s dengan persentase %d\n")
     #print "Transaksi terakhir dengan profit percentage terbesar yaitu ", IDmaks, " dengan persentase ", KeuntunganMaks, "%\n"
 }
-'
+
 
 Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahkan ke file hasil.txt sebagai tempat keluarnya output.
 
