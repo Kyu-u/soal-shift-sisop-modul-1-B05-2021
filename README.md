@@ -460,7 +460,7 @@ Pada soal 2e, diminta untuk membuat sebuah file txt bernama hasil.txt yang gunan
 
 Gambar diatas merupakan output yang keluar pada hasil.txt menggunakan Linux Amanda. Karena ketika menggunakan milik saya tidak muncul output nomor 2a namun untuk nomor 2b, 2c dan 2d keluar seperti dibawah ini :
 
-
+<img width="848" alt="ss vs code" src="https://user-images.githubusercontent.com/72669398/113424426-56a9ae80-93fa-11eb-8e9e-3e4bb9b02b01.png">
 
 
 <a name="soal3"></a>
