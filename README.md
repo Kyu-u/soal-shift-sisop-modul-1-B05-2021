@@ -18,6 +18,11 @@ Dikerjakan oleh Kelompok B05
 
 <a name="soal1"></a>
 ## Soal 1
+Ryujin baru saja diterima sebagai IT support di perusahaan Bukapedia. Dia diberikan tugas untuk membuat laporan harian untuk aplikasi internal perusahaan, ticky. Terdapat 2 laporan yang harus dia buat, yaitu laporan daftar peringkat pesan error terbanyak yang dibuat oleh ticky dan laporan penggunaan user pada aplikasi ticky.
+
+**Soal 1a**
+Kumpulkan informasi dari file ```syslog.log```. Informasi yang diperlukan antara lain: jenis log (ERROR/INFO), pesan log, dan username pada setiap baris lognya. <br>
+
 
 
 <a name="soal2"></a>
