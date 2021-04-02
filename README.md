@@ -462,6 +462,12 @@ Gambar diatas merupakan output yang keluar pada hasil.txt menggunakan Linux Aman
 
 <img width="848" alt="ss vs code" src="https://user-images.githubusercontent.com/72669398/113424426-56a9ae80-93fa-11eb-8e9e-3e4bb9b02b01.png">
 
+**Kendala dalam pengerjaan soal 2**
+- Nomor 2a sempat mengalami error yaitu hasil tidak sesuai dengan yang seharusnya 9952 dan 100% tetapi yang muncul adalah 9964 dan 0.
+- Nomor 2b sempat mengalami error nama customer keluar berulang kali.
+- Nomor 2c sempat mengalami error yaitu hasil tidak sesuai dengan yang seharusnya Home Office transaksi tetapi yang muncul waktu itu yaitu Corporate.
+- Nomor 2d sempat mengalami error yaitu hasil tidak sesuai dengan yang seharusnya Central tetapi yang muncul yaitu East.
+- Kendala yang terakhir ialah tidak muncul output nomor 2a dan solusinya saya harus meminta bantuan teman lain untuk menjalankan codingan saya agar bisa mengetahui hasilnya apa. Ternyata beberapa teman saya yang menggunakan MacBook juga tidak muncul hasil 2a dan saya belum menemukan solusi agar muncul hasilnya di MacOS. 
 
 <a name="soal3"></a>
 ## Soal 3
