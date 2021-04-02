@@ -97,10 +97,12 @@ Pada proses diatas setiap barisnya akan dilakukan perbandingan yaitu PersentaseK
 
 Lalu, akan dilakukan pencetakan variabel IDmaks dan KeuntunganMaks sesuai format soal shift modul.
 
+```
 {
     printf("Transaksi terakhir dengan profit percentage terbesar yaitu %s dengan persentase %d\n")
     #print "Transaksi terakhir dengan profit percentage terbesar yaitu ", IDmaks, " dengan persentase ", KeuntunganMaks, "%\n"
 }
+```
 
 
 Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahkan ke file hasil.txt sebagai tempat keluarnya output.
@@ -109,6 +111,210 @@ Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahka
 /Users/nadiatiara/praktikum_sisop/soal2/Laporan-TokoShiSop.tsv > hasil.txt
 ```
 
+**Nomor 2b**
+Clemong memiliki rencana promosi di Albuquerque menggunakan metode MLM. Oleh karena itu, Clemong membutuhkan daftar **nama customer pada transaksi tahun 2017 di Albuquerque**.
+
+**Source Code dan Penjelasan**
+```
+awk 'BEGIN {FS="\t"}
+{
+    NamaCust=$7
+
+    #utk cari nama customer di tahun 2017 dari Order_ID dan di kota Albuquerque
+    if ($2~"2017" && ($10=="Albuquerque")) 
+    {
+        pelanggan[NamaCust]+=1 
+    }
+}
+END{
+
+    #untuk cetak nama2 pelanggannya
+    print "Daftar nama customer di Albuquerque pada tahun 2017 antara lain:"
+    for (NamaPelanggan in pelanggan)
+    {
+        print NamaPelanggan
+        #print"\n"
+    }
+   print "\n"
+}' /Users/nadiatiara/praktikum_sisop/soal2/Laporan-TokoShiSop.tsv >> hasil.txt
+```
+
+Sama seperti nomor 2a, pada nomor 2b ini sama menggunakan awk.
+
+```
+if ($2~"2017" && ($10=="Albuquerque")) 
+    {
+        pelanggan[NamaCust]+=1 
+    }
+```
+
+kondisi diatas dilakukan untuk mencari nama customer yang melalakukan transaksi pada tahun 2017 dan di kota Albuquerque. Setiap baris akan dilakukan pengecekan pada``` $2``` atau kolom dua untuk mencari tahun pada kolom ```Order ID``` dan pada ```$10``` atau kolom sepuluh untuk mencari kota Albuquerque pada kolom ```City```. Nama customer akan disimpan pada array ```pelanggan[NamaCust]```. Array tersebut menggunakan associative array dimana NamaCust sebagi index dan setiap jumlah nama bertambah maka itu dihitung sebagai value. 
+
+Lalu, akan dilakukan pencetakan sesuai format soal shift modul. Iterasi semua nilai pada array pelanggan untuk menampilkan NamaPelanggan. Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahkan ke file hasil.txt sebagai tempat keluarnya output.
+
+```
+print "Daftar nama customer di Albuquerque pada tahun 2017 antara lain:"
+    for (NamaPelanggan in pelanggan)
+    {
+        print NamaPelanggan
+        #print"\n"
+    }
+   print "\n"
+}'/Users/nadiatiara/praktikum_sisop/soal2/Laporan-TokoShiSop.tsv >> hasil.txt
+```
+
+**Nomor 2c**
+TokoShiSop berfokus tiga segment customer, antara lain: Home Office, Customer, dan Corporate. Clemong ingin meningkatkan penjualan pada segmen customer yang paling sedikit. Oleh karena itu, Clemong membutuhkan **segment customer** dan **jumlah transaksinya yang paling sedikit**.
+
+**Source Code dan Penjelasan**
+
+```
+export LC_ALL=C #buat mesin baca (.) jadi desimal
+awk 'BEGIN {FS="\t"}
+{
+   #baca semua row tp kalau NR tidak sama dengan 1 gamau baca baris pertama
+   if (NR!=1) 
+   {
+       segment[$8]+=1
+   }
+}
+END{
+   Min=5000
+ 
+   #utk mencari segment customer dan jumlah transaksi yang paling sedikit
+   for(x in segment){ #cek setiap element disetiap segment
+       if(Min>segment[x])
+       {
+           Min=segment[x]
+           SegMin=x
+       }
+   }
+   printf ("Tipe segmen customer yang penjualannya paling sedikit adalah %s dengan %d transaksi.\n", SegMin, Min)
+  #printf("%d %.1f \n", segment, Min)
+}' /Users/nadiatiara/praktikum_sisop/soal2/Laporan-TokoShiSop.tsv >> hasil.txt
+```
+
+Sama seperti nomor 2a, pada nomor 2c ini sama menggunakan ```awk``` dan``` LC_ALL=C```.
+
+```
+if (NR!=1) 
+   {
+       segment[$8]+=1
+   }
+```
+
+Kondisi diatas digunakan untuk menghitung banyaknya segment. ```NR!=1``` maksudnya adalah untuk membaca semua baris kecuali baris pertama karena baris pertama adalah judul/header dan baris yang dibaca dimulai dari baris kedua. Array ```segment [$8]``` bermaksud sebagai index dan penghitung transaksi sebagai valuenya.
+
+Kemudian, ```Min=5000 ```digunakan sebagai pembanding pertama agar data selanjutnya bisa berubah. Iterasi dibawah ini dilakukan untuk mengecek element disetiap segment untuk mencari segment customer dan jumlah transaksi paling sedikit. Jika jumlah transaksi dari segment lebih kecil dibandingkan Min, maka array ```segment[x]``` dan index ```[x] ```akan tersimpan pada variabel Min dan SegMin.
+
+```
+{
+   Min=5000
+ 
+   #utk mencari segment customer dan jumlah transaksi yang paling sedikit
+   for(x in segment){ #cek setiap element disetiap segment
+       if(Min>segment[x])
+       {
+           Min=segment[x]
+           SegMin=x
+       }
+   }
+```
+
+Lalu, akan dilakukan pencetakan variabel SegMin dan Min sesuai format soal shift modul. Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahkan ke file hasil.txt sebagai tempat keluarnya output.
+
+```
+ printf ("Tipe segmen customer yang penjualannya paling sedikit adalah %s dengan %d transaksi.\n", SegMin, Min)
+```
+
+**Nomor 2d**
+TokoShiSop membagi wilayah bagian (region) penjualan menjadi empat bagian, antara lain: Central, East, South, dan West. Manis ingin mencari **wilayah bagian (region) yang memiliki total keuntungan (profit) paling sedikit** dan **total keuntungan wilayah tersebut**.
+
+**Source Code dan Penjelasan**
+```
+export LC_ALL=C #buat mesin baca (.) jadi desimal
+awk '
+BEGIN{FS="\t"}
+{
+   reg=$13
+   profit=$21
+ 
+   #baca semua row tp kalau NR tidak sama dengan 1 gamau baca baris pertama
+   if (1!=NR)
+   {
+       Region[reg]+=profit
+   }
+}
+END{
+   UntungMin=999999
+   for (x in Region)
+   {
+       #utk menghitung total keuntungan daru setiap wilayah bagian (region)
+       if (Region[x]<UntungMin)
+       {
+           regMin=x
+           UntungMin=Region[x]
+           #regMin=x
+       }
+   }
+   printf ("\nWilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah %s dengan total keuntungan %.1f", regMin, UntungMin)
+   printf ("\n\n")
+}' /Users/nadiatiara/praktikum_sisop/soal2/Laporan-TokoShiSop.tsv >> hasil.txt
+```
+
+Sama seperti nomor 2a dan 2c, pada nomor 2d ini sama menggunakan ```awk``` dan ```LC_ALL=C```.
+
+```
+if (1!=NR)
+   {
+       Region[reg]+=profit
+   }
+```
+
+Kondisi diatas mirip seperti dengan 2c. ```NR!=1``` maksudnya adalah untuk membaca semua baris kecuali baris pertama karena baris pertama adalah judul/header dan baris yang dibaca dimulai dari baris kedua. Pada 2d ini diminta untuk menghitung total keuntungan dari setiap wilayah bagian (region). Array ```Region [reg]``` bermaksud sebagai index dan profit sebagai valuenya. Setiap region profitnya dijumlahin.
+
+Kemudian, ```UntungMin=999999``` nilai UntungMin harus lebih besar dari keuntungan dari masing-masing region agar nilainya bisa terproses. Iterasi dibawah ini dilakukan untuk mencari region dengan total keuntungan paling sedikit dengan menghitung setiap total keuntungan masing-masing region pada array Region. Apabila total keuntungan pada suatu region lebih kecil maka ```Region[x]``` dan index ```[x]``` akan tersimpan pada variabel ```regMin``` dan ```UntungMin```. 
+
+```
+{
+   UntungMin=999999
+   for (x in Region)
+   {
+       #utk menghitung total keuntungan daru setiap wilayah bagian (region)
+       if (Region[x]<UntungMin)
+       {
+           regMin=x
+           UntungMin=Region[x]
+           #regMin=x
+       }
+   }
+```
+
+Lalu, akan dilakukan pencetakan variabel RegMin dan UntungMin sesuai format soal shift modul. Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahkan ke file hasil.txt sebagai tempat keluarnya output.
+ 
+```
+ printf ("\nWilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah %s dengan total keuntungan %.1f", regMin, UntungMin)
+   printf ("\n\n")
+}'
+```
+
+**Nomor 2e**
+Agar mudah dibaca oleh Manis, Clemong, dan Steven, (e) kamu diharapkan bisa membuat sebuah script yang akan menghasilkan file “hasil.txt” yang memiliki format sebagai berikut:
+
+
+Transaksi terakhir dengan profit percentage terbesar yaitu *ID Transaksi* dengan persentase *Profit Percentage*%.
+
+```
+Daftar nama customer di Albuquerque pada tahun 2017 antara lain:
+*Nama Customer1*
+*Nama Customer2* dst
+
+Tipe segmen customer yang penjualannya paling sedikit adalah *Tipe Segment* dengan *Total Transaksi* transaksi.
+
+Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah *Nama Region* dengan total keuntungan *Total Keuntungan (Profit)*
+```
+
+Pada soal 2e, diminta untuk membuat sebuah file txt bernama hasil.txt yang gunanya untuk menyimpan hasil script dari soal 2a, 2b, 2c, dan 2d. Berikut adalah isi dari file hasil.txt :
 
 
 <a name="soal3"></a>
