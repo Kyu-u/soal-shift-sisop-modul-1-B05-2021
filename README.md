@@ -31,6 +31,8 @@ grep -o "[E|I].*" syslog.log
 Penyelesaian soal ini menggunakan regex ```"[E|I].*"``` yang bermaksud untuk memfilter line yang mengandung ```E``` atau ```I``` dan ```.*``` berarti hingga akhir.<br>
 Dengan menggunakan ```grep -o``` hanya bagian line yang mengandung pattern akan ditampilkan.<br>
 
+**Contoh Output** <br>
+![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/Screenshot%202021-04-03%20145309.png)
 ### Soal 1b <br>
 Tampilkan semua pesan error yang muncul beserta jumlah kemunculannya. <br>
 
@@ -44,6 +46,8 @@ Kemudian menggunakan ```cut``` dengan delimiter ```-d "("``` untuk memisahkan li
 Untuk menghapus kata ```ERROR```, pertama digunakan ```rev``` untuk mereverse line sehingga ketika menggunakan ```cut -d "R" -f1``` kata tersebut berada di field 1. Kemudian direverse ke keadaan semula. <br>
 Kemudian disort dan kemunculan unik dihitung dengan ```uniq -c```. <br>
 
+**Contoh Output** <br>
+![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1b.png)
 ### Soal 1c <br>
 Tampilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya.<br>
 
@@ -93,6 +97,10 @@ Terakhir, sesuai dengan format, tambahkan ```User,Info,Error``` ke line pertama 
 ```shell script
 sed -i '1i Username,INFO,ERROR' user_statistic.csv
 ```
+
+**Contoh Output** <br>
+![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1c.png)
+![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1e.png)
 ### Soal 1d <br>
 Semua informasi yang didapatkan pada poin b dituliskan ke dalam file error_message.csv dengan header Error,Count yang kemudian diikuti oleh daftar pesan error dan jumlah kemunculannya diurutkan berdasarkan jumlah kemunculan pesan error dari yang terbanyak. <br>
 
@@ -141,6 +149,9 @@ Kemudian echo semua variabel ke dalam file ```error_message.csv```. <br>
 Setelah itu, untuk melakukan mengurutkan angka dari besar ke kecil digunakan ```sort```. <br>
 ```-t,``` akan memisahkan line berdasarkan delimiter ```,``` dan akan diurutkan berdasarkan ```k 2``` yaitu kolom ke-2 setelah dipisahkan <br> dan ```-nr``` untuk mengurutkan dari besar ke kecil. <br>
 Yang terakhir, gunakan ```sed -i '1i Error,Count' error_message.csv``` untuk menambahkan ```Error,Count``` ke line pertama file. <br>
+
+**Contoh Output** <br>
+![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1d.png)
 
 **Kendala yang dialami**
 - Pada pengerjaan **Soal 1a** sebelumnya belum menggunakan regex
