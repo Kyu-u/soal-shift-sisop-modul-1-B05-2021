@@ -143,9 +143,9 @@ Setelah itu, untuk melakukan mengurutkan angka dari besar ke kecil digunakan ```
 Yang terakhir, gunakan ```sed -i '1i Error,Count' error_message.csv``` untuk menambahkan ```Error,Count``` ke line pertama file. <br>
 
 **Kendala yang dialami**
-- Pada pengerjaan **Soal 1a** belum menggunakan regex
+- Pada pengerjaan **Soal 1a** sebelumnya belum menggunakan regex
 - Saat pengerjaan **Soal 1c** dalam saat menggunakan grep tidak ada output walaupun file yang digrep sudah sesuai
-- 
+- **Soal 1b** sebelumnya tidak menggunakan regex
 
 <a name="soal2"></a>
 ## Soal 2
