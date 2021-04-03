@@ -723,7 +723,7 @@ zip -q -r -P "$settingPassword" -m Koleksi.zip Kucing_* Kelinci_*
 ```
 
 **Penyelesaian** <br>
-Gunakan command ```zip``` untuk men-zip folder ```Kucing_*``` dan ```Kelinci_*```. ```-q``` untuk menyembunyikan output dari ketika proses men-zip file. ```-r``` untuk mengarsipkan folder dan seluruh folder. ```-m``` untuk memindahkan folder ```Kucing_*``` dan ```Kelinci_*``` ke file ```Koleksi.zip```. ```-P``` atau ```--password``` untuk memberi password pada file ```Koleksi.zip``` berupa tanggal hari ini dengan format ```MMDDYYYY```.
+Gunakan command ```zip``` untuk men-zip folder ```Kucing_*``` dan ```Kelinci_*```. ```-q``` untuk menyembunyikan output dari ketika proses men-zip file. ```-r``` untuk mengarsipkan folder dan seluruh isi folder. ```-m``` untuk memindahkan folder ```Kucing_*``` dan ```Kelinci_*``` ke file ```Koleksi.zip```. ```-P``` atau ```--password``` untuk memberi password pada file ```Koleksi.zip``` berupa tanggal hari ini dengan format ```MMDDYYYY```.
 
 <a name="soal3e"></a>
 ### Soal 3e
