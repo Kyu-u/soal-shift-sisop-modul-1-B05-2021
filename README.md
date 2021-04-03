@@ -511,7 +511,7 @@ cd ~/soal-shift-sisop-modul-1-B05-2021/soal3
 
 Variabel ```count``` digunakan untuk men-tracking jumlah file yang telah ada di dalam directory (dengan catatan tidak ada file yang sama).
 
-<a name="langkah-3a"></a>
+<a name="langkah3a"></a>
 Berikut langkah penyelesaian untuk soal 3a:
 1. Dilakukan proses iterasi sebanyak 23 kali untuk mengunduh 23 file gambar.
     ```shell script 
