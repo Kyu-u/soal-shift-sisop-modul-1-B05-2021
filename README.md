@@ -647,7 +647,7 @@ Berikut adalah langkah penyelesaian soal 3c.
 	```
 	Jika ditemukan folder dengan nama ```Kelinci_$yesterdayDate```, maka hari ini kita akan mengunduh file kucing. Sebaliknya, jika tidak ada maka unduh file kelinci.
 2. Buat folder baru dengan format ```Kucing_$currentDate``` atau ```Kelinci_$currentDate```.
-3. Untuk proses selanjutnya, sama dengan [langkah penyelesaian soal 3a](langkah3a). Yang berbeda hanyalah link website yang harus disesuaikan dengan file yang hari itu diunduh.
+3. Untuk proses selanjutnya, sama dengan [langkah penyelesaian soal 3a](#langkah3a). Yang berbeda hanyalah link website yang harus disesuaikan dengan file yang hari itu diunduh.
 	```shell script
 	if [ $flag -eq 0 ]
 		then
