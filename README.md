@@ -142,6 +142,10 @@ Setelah itu, untuk melakukan mengurutkan angka dari besar ke kecil digunakan ```
 ```-t,``` akan memisahkan line berdasarkan delimiter ```,``` dan akan diurutkan berdasarkan ```k 2``` yaitu kolom ke-2 setelah dipisahkan <br> dan ```-nr``` untuk mengurutkan dari besar ke kecil. <br>
 Yang terakhir, gunakan ```sed -i '1i Error,Count' error_message.csv``` untuk menambahkan ```Error,Count``` ke line pertama file. <br>
 
+**Kendala yang dialami**
+- Pada pengerjaan **Soal 1a** belum menggunakan regex
+- Saat pengerjaan **Soal 1c** dalam saat menggunakan grep tidak ada output walaupun file yang digrep sudah sesuai
+- 
 
 <a name="soal2"></a>
 ## Soal 2
