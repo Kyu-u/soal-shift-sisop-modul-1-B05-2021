@@ -647,7 +647,7 @@ Berikut adalah langkah penyelesaian soal 3c.
 	```
 	Jika ditemukan folder dengan nama ```Kelinci_$yesterdayDate```, maka hari ini kita akan mengunduh file kucing. Sebaliknya, jika tidak ada maka unduh file kelinci.
 2. Buat folder baru dengan format ```Kucing_$currentDate``` atau ```Kelinci_$currentDate```.
-3. Untuk proses selanjutnya, sama dengan [langkah penyelesaian soal 3a](langkah-3a). Yang berbeda hanyalah link website yang harus disesuaikan dengan file yang hari itu diunduh.
+3. Untuk proses selanjutnya, sama dengan [langkah penyelesaian soal 3a](langkah3a). Yang berbeda hanyalah link website yang harus disesuaikan dengan file yang hari itu diunduh.
 	```shell script
 	if [ $flag -eq 0 ]
 		then
@@ -729,7 +729,7 @@ mv Foto.log "./$directoryName"
 Pindahkan seluruh folder ke zip dengan nama ```Koleksi.zip``` dan beri password berupa tanggal hari ini dengan format ```MMDDYYYYY```.
 
 **Penyelesaian** <br>
-Gunakan command ```zip``` untuk men-zip folder ```Kucing_*``` dan ```Kelinci_*```. ```-q``` untuk menyembunyikan output dari ketika proses men-zip file. ```-r``` untuk mengarsipkan folder dan seluruh isi folder. ```-m``` untuk memindahkan folder ```Kucing_*``` dan ```Kelinci_*``` ke file ```Koleksi.zip```. ```-P``` atau ```--password``` untuk memberi password pada file ```Koleksi.zip``` berupa tanggal hari ini dengan format ```MMDDYYYY```.
+Gunakan command ```zip``` untuk men-zip folder ```Kucing_*``` dan ```Kelinci_*```. ```-q``` untuk menyembunyikan output dari ketika proses men-zip file. ```-r``` untuk mengarsipkan folder dan seluruh isi folder. Command ```-m``` untuk menghapus folder-folder yang di-zip yaitu ```Kucing_*``` dan ```Kelinci_*```. ```-P``` atau ```--password``` untuk memberi password pada file ```Koleksi.zip``` berupa tanggal hari ini dengan format ```MMDDYYYY```.
 
 **Source Code**
 ```shell script
@@ -800,5 +800,6 @@ rm "./Koleksi.zip"
 ```
 
 **Kendala dalam pengerjaan soal 3**
-1. Belum mengerti bagaimana cara menjalankan cronjob sehingga belum bisa mengecek kebenaran pengerjaan soal 3b dan 3e. Solusinya adalah ubah setting waktu pada linux dengan referensi berikut https://www.youtube.com/watch?v=HUX8pMEEj9g.
-2. Belum paham mengenai command-command pada terminal. Solusinya adalah membaca banyak referensi, salah satunya https://linuxize.com/post/how-to-zip-files-and-directories-in-linux/.
+1. Belum mengerti bagaimana cara menjalankan cron sehingga belum bisa mengecek kebenaran pengerjaan soal 3b dan 3e. Solusinya adalah ubah setting waktu pada linux dengan referensi berikut https://www.youtube.com/watch?v=HUX8pMEEj9g.
+2. File zip pada soal 3d hanya mengarsipkan foldernya saja, isinya tidak ikut terzip dan folder asli yang di-zip-kan tidak terhapus karena kurang menambahkan command ```-r``` untuk memindahkan isi dari folder dan command ```-m``` untuk menghapus folder asli dari zip.
+3. Belum paham mengenai command-command pada terminal. Solusinya adalah membaca banyak referensi, salah satunya https://linuxize.com/post/how-to-zip-files-and-directories-in-linux/.
