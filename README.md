@@ -20,22 +20,22 @@ Dikerjakan oleh Kelompok B05
 ## Soal 1
 Ryujin baru saja diterima sebagai IT support di perusahaan Bukapedia. Dia diberikan tugas untuk membuat laporan harian untuk aplikasi internal perusahaan, ticky. Terdapat 2 laporan yang harus dia buat, yaitu laporan daftar peringkat pesan error terbanyak yang dibuat oleh ticky dan laporan penggunaan user pada aplikasi ticky. <br>
 
-**Soal 1a** <br>
+### Soal 1a <br>
 Kumpulkan informasi dari file ```syslog.log```. Informasi yang diperlukan antara lain: jenis log (ERROR/INFO), pesan log, dan username pada setiap baris lognya. <br>
 
 **Source Code dan Penjelasan** <br>
-```
+```shell script
 grep -o "[E|I].*" syslog.log
 ```
 
 Penyelesaian soal ini menggunakan regex ```"[E|I].*"``` yang bermaksud untuk memfilter line yang mengandung ```E``` atau ```I``` dan ```.*``` berarti hingga akhir.<br>
 Dengan menggunakan ```grep -o``` hanya bagian line yang mengandung pattern akan ditampilkan.<br>
 
-**Soal 1b** <br>
+### Soal 1b <br>
 Tampilkan semua pesan error yang muncul beserta jumlah kemunculannya. <br>
 
 **Source Code dan Penjelasan** <br>
-```
+```shell script
 grep -o "ERROR.*" syslog.log | cut -d "(" -f1 | rev | cut -d "R" -f1 | rev | sort | uniq -c
 ```
 
@@ -44,13 +44,13 @@ Kemudian menggunakan ```cut``` dengan delimiter ```-d "("``` untuk memisahkan li
 Untuk menghapus kata ```ERROR```, pertama digunakan ```rev``` untuk mereverse line sehingga ketika menggunakan ```cut -d "R" -f1``` kata tersebut berada di field 1. Kemudian direverse ke keadaan semula. <br>
 Kemudian disort dan kemunculan unik dihitung dengan ```uniq -c```. <br>
 
-**Soal 1c dan 1e** <br>
+### Soal 1c <br>
 Tampilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya.<br>
 
 Semua informasi yang didapatkan pada poin b dituliskan ke dalam file error_message.csv dengan header Error,Count yang kemudian diikuti oleh daftar pesan error dan jumlah kemunculannya diurutkan berdasarkan jumlah kemunculan pesan error dari yang terbanyak. <br>
 
 **Source Code dan Penjelasan**
-```
+```shell script
 tr ' ' '\n' < syslog.log > temp.txt
 
 grep -o "(.*)" temp.txt| tr -d  "(" | tr -d ")" | sort | uniq >> temp2.txt
@@ -70,7 +70,7 @@ Kemudian dalam file baru mencari semua username dengan memfilter dengan ```grep 
 ```tr -d  "(" | tr -d ")"``` akan menghapus ```(``` dan ```)``` dari file sehingga hanya tersisa username dalam file. <br>
 Setelah itu sort secara alphabet dengan ```sort | uniq```. Ini juga akan menghilangkan semua duplikat nama. <br>
 
-```
+```shell script
 while read user
 do
 	error=$(grep "ERROR.*($user)" syslog.log | wc -l)
@@ -80,24 +80,24 @@ do
 done < temp2.txt
 ```
 Bagian code ini akan melakukan iterasi melalui file ```temp2.txt``` yang berisi username dan untuk setiap user (line) akan menyimpan banyak kemunculan ke dalam variable. <br>
-```
+```shell script
 error=$(grep "ERROR.*($user)" syslog.log | wc -l)
 info=$(grep "INFO.*($user)" syslog.log | wc -l)
 ```
 Kemudian untuk setiap user akan ditampilkan kemunculan error dan info, serta dimasukkan ke dalam file ```user_statistic.csv```. <br>
-```
+```shell script
 echo "$user, INFO:$info, ERROR:$error"
 printf "%s,%d,%d\n" $user $info $error >> user_statistic.csv
 ```
 Terakhir, sesuai dengan format, tambahkan ```User,Info,Error``` ke line pertama ```user_statistic.csv```. <br>
-```
+```shell script
 sed -i '1i Username,INFO,ERROR' user_statistic.csv
 ```
-**Soal 1d** <br>
+### Soal 1d <br>
 Semua informasi yang didapatkan pada poin b dituliskan ke dalam file error_message.csv dengan header Error,Count yang kemudian diikuti oleh daftar pesan error dan jumlah kemunculannya diurutkan berdasarkan jumlah kemunculan pesan error dari yang terbanyak. <br>
 
 **Source Code dan Penjelasan** <br>
-```
+```shell script
 permission=$(grep "Permission denied while closing ticket" syslog.log | wc -l)
 noticket=$(grep "Ticket doesn't exist" syslog.log | wc -l)
 tried=$(grep "Tried to add information to closed ticket" syslog.log | wc -l)
@@ -128,7 +128,7 @@ sed -i '1i Error,Count' error_message.csv
 ```
 
 Untuk setiap jenis pesan error simpan ke dalam variabel untuk menghitung banyaknya muncul. <br>
-```
+```shell script
 permission=$(grep "Permission denied while closing ticket" syslog.log | wc -l)
 noticket=$(grep "Ticket doesn't exist" syslog.log | wc -l)
 tried=$(grep "Tried to add information to closed ticket" syslog.log | wc -l)
@@ -143,11 +143,6 @@ Setelah itu, untuk melakukan mengurutkan angka dari besar ke kecil digunakan ```
 Yang terakhir, gunakan ```sed -i '1i Error,Count' error_message.csv``` untuk menambahkan ```Error,Count``` ke line pertama file. <br>
 
 
-
-
-
-
-
 <a name="soal2"></a>
 ## Soal 2
 Steven dan Manis mendirikan sebuah startup bernama **“TokoShiSop”**. Sedangkan kamu dan Clemong adalah karyawan pertama dari TokoShiSop. Setelah tiga tahun bekerja, Clemong diangkat menjadi manajer penjualan TokoShiSop, sedangkan kamu menjadi kepala gudang yang mengatur keluar masuknya barang.
@@ -156,12 +151,12 @@ Tiap tahunnya, TokoShiSop mengadakan Rapat Kerja yang membahas bagaimana hasil p
 
 Karena kamu diminta untuk mencari beberapa kesimpulan yang ada pada soal nomor 2 dari data penjualan yang berformat file tsv (tab-separated values/file nilai yang dipisahkan oleh tab) bernama ```Laporan-TokoShisop.tsv``` . Kemudian, terdapat 4 perintah soal yang terbagi menjadi 2a, 2b, 2c, dan 2d di dalam script ```soal2_generate_laporan_ihir_shisop.sh``` . Lalu, hasil yang akan dtampilakan pada ```hasil.txt``` . <br>
 
-**Nomor 2a** <br>
+### Soal 2a <br>
 Pada nomor 2a, Steven ingin mengapresiasi kinerja karyawannya selama ini dengan mengetahui **Row ID** dan **profit percentage** terbesar (jika hasil profit percentage terbesar lebih dari 1, maka ambil Row ID yang paling besar). Karena kamu bingung, Clemong memberikan definisi dari *profit percentage*, yaitu: <br>
 ```Profit Persentage = (Profit/Cost Price)x100```
 
 **Source Code dan Penjelasan** <br>
-```bash
+```shell script
 export LC_ALL=C
 awk '
 BEGIN {FS="\t"; KeuntunganMaks=0} 
@@ -186,14 +181,13 @@ END{
 ```
 
 Penyelesaian soal nomor 2 ini menggunakan 
-
 ``` bash
 awk ‘ ‘
 ```
 
-Fungsi dasar **awk** adalah untuk mencari pola pada file per baris (atau unit teks lain) yang berisi pola tertentu. Ketika suatu baris sesuai dengan pola, awk melakukan aksi yang khusus pada baris tersebut Sehingga awk di import pada awal **shell script**. Karena file ```Laporan-TokoShisop.tsv``` berformaat **tsv(tab-separated value)** atau File nilai yang dipisahkan tab agar bisa membaca data antar kolom, maka digunakanlah 
+Fungsi dasar ```awk``` adalah untuk mencari pola pada file per baris (atau unit teks lain) yang berisi pola tertentu. Ketika suatu baris sesuai dengan pola, awk melakukan aksi yang khusus pada baris tersebut Sehingga awk di import pada awal **shell script**. Karena file ```Laporan-TokoShisop.tsv``` berformaat **tsv(tab-separated value)** atau File nilai yang dipisahkan tab agar bisa membaca data antar kolom, maka digunakanlah 
 
-``` bash
+```shell script
 BEGIN {FS=”\t”}
 ```
 
@@ -223,7 +217,7 @@ ID_Baris=$1
 
 Variabel diatas, berfungsi untuk menyimpan argumen pertama yaitu kolom 1 atau row ID yang berada pada file Laporan-TokoShisop.tsv .
 
-``` bash
+```shell script
 if (KeuntunganMaks<=PersentaseKeuntungan)
         {
             IDmaks=ID_Baris 
@@ -235,7 +229,7 @@ Pada proses diatas setiap barisnya akan dilakukan perbandingan yaitu PersentaseK
 
 Lalu, akan dilakukan pencetakan variabel IDmaks dan KeuntunganMaks sesuai format soal shift modul.
 
-``` bash
+```shell script
 {
     printf("Transaksi terakhir dengan profit percentage terbesar yaitu %s dengan persentase %d\n")
     #print "Transaksi terakhir dengan profit percentage terbesar yaitu ", IDmaks, " dengan persentase ", KeuntunganMaks, "%\n"
@@ -245,15 +239,15 @@ Lalu, akan dilakukan pencetakan variabel IDmaks dan KeuntunganMaks sesuai format
 
 Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahkan ke file hasil.txt sebagai tempat keluarnya output.
 
-```
+```shell script
 /Users/nadiatiara/praktikum_sisop/soal2/Laporan-TokoShiSop.tsv > hasil.txt
 ```
 
-**Nomor 2b** <br>
+### Soal 2b <br>
 Clemong memiliki rencana promosi di Albuquerque menggunakan metode MLM. Oleh karena itu, Clemong membutuhkan daftar **nama customer pada transaksi tahun 2017 di Albuquerque**.
 
 **Source Code dan Penjelasan** <br>
-``` bash
+```shell script
 awk 'BEGIN {FS="\t"}
 {
     NamaCust=$7
@@ -279,7 +273,7 @@ END{
 
 Sama seperti nomor 2a, pada nomor 2b ini sama menggunakan awk.
 
-``` bash
+```shell script
 if ($2~"2017" && ($10=="Albuquerque")) 
     {
         pelanggan[NamaCust]+=1 
@@ -290,7 +284,7 @@ kondisi diatas dilakukan untuk mencari nama customer yang melalakukan transaksi 
 
 Lalu, akan dilakukan pencetakan sesuai format soal shift modul. Iterasi semua nilai pada array pelanggan untuk menampilkan NamaPelanggan. Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahkan ke file hasil.txt sebagai tempat keluarnya output.
 
-``` bash
+```shell script
 print "Daftar nama customer di Albuquerque pada tahun 2017 antara lain:"
     for (NamaPelanggan in pelanggan)
     {
@@ -301,12 +295,11 @@ print "Daftar nama customer di Albuquerque pada tahun 2017 antara lain:"
 }'/Users/nadiatiara/praktikum_sisop/soal2/Laporan-TokoShiSop.tsv >> hasil.txt
 ```
 
-**Nomor 2c** <br>
+### Soal 2c <br>
 TokoShiSop berfokus tiga segment customer, antara lain: Home Office, Customer, dan Corporate. Clemong ingin meningkatkan penjualan pada segmen customer yang paling sedikit. Oleh karena itu, Clemong membutuhkan **segment customer** dan **jumlah transaksinya yang paling sedikit**.
 
 **Source Code dan Penjelasan** <br>
-
-``` bash
+```shell script
 export LC_ALL=C #buat mesin baca (.) jadi desimal
 awk 'BEGIN {FS="\t"}
 {
@@ -334,7 +327,7 @@ END{
 
 Sama seperti nomor 2a, pada nomor 2c ini sama menggunakan ```awk``` dan``` LC_ALL=C```.
 
-``` bash
+```shell script
 if (NR!=1) 
    {
        segment[$8]+=1
@@ -345,7 +338,7 @@ Kondisi diatas digunakan untuk menghitung banyaknya segment. ```NR!=1``` maksudn
 
 Kemudian, ```Min=5000 ```digunakan sebagai pembanding pertama agar data selanjutnya bisa berubah. Iterasi dibawah ini dilakukan untuk mengecek element disetiap segment untuk mencari segment customer dan jumlah transaksi paling sedikit. Jika jumlah transaksi dari segment lebih kecil dibandingkan Min, maka array ```segment[x]``` dan index ```[x] ```akan tersimpan pada variabel Min dan SegMin.
 
-``` bash
+```shell script
 {
    Min=5000
  
@@ -361,15 +354,15 @@ Kemudian, ```Min=5000 ```digunakan sebagai pembanding pertama agar data selanjut
 
 Lalu, akan dilakukan pencetakan variabel SegMin dan Min sesuai format soal shift modul. Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahkan ke file hasil.txt sebagai tempat keluarnya output.
 
-``` bash
+```shell script
  printf ("Tipe segmen customer yang penjualannya paling sedikit adalah %s dengan %d transaksi.\n", SegMin, Min)
 ```
 
-**Nomor 2d** <br>
+### Soal 2d <br>
 TokoShiSop membagi wilayah bagian (region) penjualan menjadi empat bagian, antara lain: Central, East, South, dan West. Manis ingin mencari **wilayah bagian (region) yang memiliki total keuntungan (profit) paling sedikit** dan **total keuntungan wilayah tersebut**.
 
 **Source Code dan Penjelasan** <br>
-``` bash
+```shell script
 export LC_ALL=C #buat mesin baca (.) jadi desimal
 awk '
 BEGIN{FS="\t"}
@@ -401,8 +394,7 @@ END{
 ```
 
 Sama seperti nomor 2a dan 2c, pada nomor 2d ini sama menggunakan ```awk``` dan ```LC_ALL=C```.
-
-``` bash
+``` shell script
 if (1!=NR)
    {
        Region[reg]+=profit
@@ -413,7 +405,7 @@ Kondisi diatas mirip seperti dengan 2c. ```NR!=1``` maksudnya adalah untuk memba
 
 Kemudian, ```UntungMin=999999``` nilai UntungMin harus lebih besar dari keuntungan dari masing-masing region agar nilainya bisa terproses. Iterasi dibawah ini dilakukan untuk mencari region dengan total keuntungan paling sedikit dengan menghitung setiap total keuntungan masing-masing region pada array Region. Apabila total keuntungan pada suatu region lebih kecil maka ```Region[x]``` dan index ```[x]``` akan tersimpan pada variabel ```regMin``` dan ```UntungMin```. 
 
-``` bash
+```shell script
 {
    UntungMin=999999
    for (x in Region)
@@ -430,19 +422,18 @@ Kemudian, ```UntungMin=999999``` nilai UntungMin harus lebih besar dari keuntung
 
 Lalu, akan dilakukan pencetakan variabel RegMin dan UntungMin sesuai format soal shift modul. Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahkan ke file hasil.txt sebagai tempat keluarnya output.
  
-``` bash
+```shell script
  printf ("\nWilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah %s dengan total keuntungan %.1f", regMin, UntungMin)
    printf ("\n\n")
 }'
 ```
 
-**Nomor 2e** <br>
+### Soal 2e <br>
 Agar mudah dibaca oleh Manis, Clemong, dan Steven, (e) kamu diharapkan bisa membuat sebuah script yang akan menghasilkan file “hasil.txt” yang memiliki format sebagai berikut:
 
 
 Transaksi terakhir dengan profit percentage terbesar yaitu *ID Transaksi* dengan persentase *Profit Percentage*%.
-
-```
+```shell script
 Transaksi terakhir dengan profit percentage terbesar yaitu *ID Transaksi* dengan persentase *Profit Percentage*%.
 
 Daftar nama customer di Albuquerque pada tahun 2017 antara lain:
