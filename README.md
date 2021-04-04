@@ -41,7 +41,7 @@ Penyelesaian soal ini menggunakan regex ```"[E|I].*"``` yang bermaksud untuk mem
 Dengan menggunakan ```grep -o``` hanya bagian line yang mengandung pattern akan ditampilkan.<br>
 
 **Contoh Output** <br>
-![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1a.png)
+<img src="https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1a.png" width="400"></img>
 
 <a name="soal1b"></a>
 ### Soal 1b <br>
@@ -112,8 +112,8 @@ sed -i '1i Username,INFO,ERROR' user_statistic.csv
 ```
 
 **Contoh Output** <br>
-![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1c.png)
-![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1e.png)
+<img src="https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1c.png" height="350"></img>
+<img src="https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1e.png" height="350"></img>
 
 <a name="soal1d"></a>
 ### Soal 1d <br>
@@ -166,7 +166,7 @@ Setelah itu, untuk melakukan mengurutkan angka dari besar ke kecil digunakan ```
 Yang terakhir, gunakan ```sed -i '1i Error,Count' error_message.csv``` untuk menambahkan ```Error,Count``` ke line pertama file. <br>
 
 **Contoh Output** <br>
-![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1d.png)
+<img src="https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1d.png" height="350"></img>
 
 **Kendala yang dialami**
 - Pada pengerjaan **Soal 1a** sebelumnya belum menggunakan regex
@@ -592,7 +592,7 @@ do
 done
 ```
 
-**Hasil unduh**
+**Hasil unduh** <br>
 <img src="https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal3a.png" width="600"></img>
 
 <a name="soal3b"></a>
@@ -637,8 +637,8 @@ mv Foto.log "./$newDir"
 0 20 1-31/7,2-31/4 * * /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3b.sh
 ```
 
-**Hasil**
-<img src="https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal3b.png"></img>
+**Hasil** <br>
+<img src="https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal3b.png" width="800"></img>
 
 <a name="soal3c"></a>
 ### Soal 3c
@@ -729,6 +729,9 @@ mv *.jpg "./$directoryName"
 mv Foto.log "./$directoryName"
 ```
 
+**Hasil** <br>
+<img src="https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal3c.png" width="800"></img>
+
 <a name="soal3d"></a>
 ### Soal 3d
 **Perintah** <br>
@@ -750,6 +753,9 @@ settingPassword=$(date +"%m%d%Y")
 # zip file
 zip -q -r -P "$settingPassword" -m Koleksi.zip Kucing_* Kelinci_*
 ```
+**Hasil zip** <br>
+<img src="https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal3d-1.png" width="800"></img>
+<img src="https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal3d-2.png" width="400"></img>
 
 <a name="soal3e"></a>
 ### Soal 3e
@@ -804,6 +810,8 @@ rm "./Koleksi.zip"
 # unzip saat tidak kuliah
 0 18 * * 1-5 /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3e.sh
 ```
+**Hasil unzip** <br>
+<img src="https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal3e.png" width="800"></img>
 
 **Kendala dalam pengerjaan soal 3**
 1. Belum mengerti bagaimana cara menjalankan cron sehingga belum bisa mengecek kebenaran pengerjaan soal 3b dan 3e. Solusinya adalah ubah setting waktu pada linux dengan referensi berikut https://www.youtube.com/watch?v=HUX8pMEEj9g.
