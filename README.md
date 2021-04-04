@@ -41,7 +41,7 @@ Penyelesaian soal ini menggunakan regex ```"[E|I].*"``` yang bermaksud untuk mem
 Dengan menggunakan ```grep -o``` hanya bagian line yang mengandung pattern akan ditampilkan.<br>
 
 **Contoh Output** <br>
-![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/Screenshot%202021-04-03%20145309.png)
+![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1a.png)
 
 <a name="soal1b"></a>
 ### Soal 1b <br>
@@ -592,6 +592,9 @@ do
 done
 ```
 
+**Hasil unduh**
+<img src="https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal3a.png" width="600"></img>
+
 <a name="soal3b"></a>
 ### Soal 3b
 **Perintah** <br>
@@ -633,6 +636,9 @@ mv Foto.log "./$newDir"
 # execute soal3b.sh
 0 20 1-31/7,2-31/4 * * /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3b.sh
 ```
+
+**Hasil**
+<img src="https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal3b.png"></img>
 
 <a name="soal3c"></a>
 ### Soal 3c
