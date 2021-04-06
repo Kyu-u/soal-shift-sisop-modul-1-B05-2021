@@ -8,8 +8,16 @@ Dikerjakan oleh Kelompok B05
 
 ## Table of Contents
 1. [Soal 1](#soal1)
-2. [Soal 2](#soal2)
-3. [Soal 3](#soal3)
+   * [Soal 1a](#soal1a)
+   * [Soal 1b](#soal1b)
+   * [Soal 1c](#soal1c)
+   * [Soal 1d](#soal1d)
+3. [Soal 2](#soal2)
+   * [Soal 2a](#soal2a)
+   * [Soal 2b](#soal2b)
+   * [Soal 2c](#soal2c)
+   * [Soal 2d](#soal2d)
+5. [Soal 3](#soal3)
    * [Soal 3a](#soal3a)
    * [Soal 3b](#soal3b)
    * [Soal 3c](#soal3c)
@@ -20,6 +28,7 @@ Dikerjakan oleh Kelompok B05
 ## Soal 1
 Ryujin baru saja diterima sebagai IT support di perusahaan Bukapedia. Dia diberikan tugas untuk membuat laporan harian untuk aplikasi internal perusahaan, ticky. Terdapat 2 laporan yang harus dia buat, yaitu laporan daftar peringkat pesan error terbanyak yang dibuat oleh ticky dan laporan penggunaan user pada aplikasi ticky. <br>
 
+<a name="soal1a"></a>
 ### Soal 1a <br>
 Kumpulkan informasi dari file ```syslog.log```. Informasi yang diperlukan antara lain: jenis log (ERROR/INFO), pesan log, dan username pada setiap baris lognya. <br>
 
@@ -33,6 +42,8 @@ Dengan menggunakan ```grep -o``` hanya bagian line yang mengandung pattern akan 
 
 **Contoh Output** <br>
 ![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/Screenshot%202021-04-03%20145309.png)
+
+<a name="soal1b"></a>
 ### Soal 1b <br>
 Tampilkan semua pesan error yang muncul beserta jumlah kemunculannya. <br>
 
@@ -48,6 +59,8 @@ Kemudian disort dan kemunculan unik dihitung dengan ```uniq -c```. <br>
 
 **Contoh Output** <br>
 ![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1b.png)
+
+<a name="soal1c"></a>
 ### Soal 1c <br>
 Tampilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya.<br>
 
@@ -101,6 +114,8 @@ sed -i '1i Username,INFO,ERROR' user_statistic.csv
 **Contoh Output** <br>
 ![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1c.png)
 ![alt text](https://github.com/Kyu-u/soal-shift-sisop-modul-1-B05-2021/blob/main/screenshots/soal1e.png)
+
+<a name="soal1d"></a>
 ### Soal 1d <br>
 Semua informasi yang didapatkan pada poin b dituliskan ke dalam file error_message.csv dengan header Error,Count yang kemudian diikuti oleh daftar pesan error dan jumlah kemunculannya diurutkan berdasarkan jumlah kemunculan pesan error dari yang terbanyak. <br>
 
@@ -166,6 +181,7 @@ Tiap tahunnya, TokoShiSop mengadakan Rapat Kerja yang membahas bagaimana hasil p
 
 Karena kamu diminta untuk mencari beberapa kesimpulan yang ada pada soal nomor 2 dari data penjualan yang berformat file tsv (tab-separated values/file nilai yang dipisahkan oleh tab) bernama ```Laporan-TokoShisop.tsv``` . Kemudian, terdapat 4 perintah soal yang terbagi menjadi 2a, 2b, 2c, dan 2d di dalam script ```soal2_generate_laporan_ihir_shisop.sh``` . Lalu, hasil yang akan dtampilakan pada ```hasil.txt``` . <br>
 
+<a name="soal2a"></a>
 ### Soal 2a <br>
 Pada nomor 2a, Steven ingin mengapresiasi kinerja karyawannya selama ini dengan mengetahui **Row ID** dan **profit percentage** terbesar (jika hasil profit percentage terbesar lebih dari 1, maka ambil Row ID yang paling besar). Karena kamu bingung, Clemong memberikan definisi dari *profit percentage*, yaitu: <br>
 ```Profit Persentage = (Profit/Cost Price)x100```
@@ -258,6 +274,7 @@ Kemudian, langkah terakhir adalah memanggil direktori dibawah ini untuk diarahka
 /Users/nadiatiara/praktikum_sisop/soal2/Laporan-TokoShiSop.tsv > hasil.txt
 ```
 
+<a name="soal2b"></a>
 ### Soal 2b <br>
 Clemong memiliki rencana promosi di Albuquerque menggunakan metode MLM. Oleh karena itu, Clemong membutuhkan daftar **nama customer pada transaksi tahun 2017 di Albuquerque**.
 
@@ -310,6 +327,7 @@ print "Daftar nama customer di Albuquerque pada tahun 2017 antara lain:"
 }'/Users/nadiatiara/praktikum_sisop/soal2/Laporan-TokoShiSop.tsv >> hasil.txt
 ```
 
+<a name="soal2c"></a>
 ### Soal 2c <br>
 TokoShiSop berfokus tiga segment customer, antara lain: Home Office, Customer, dan Corporate. Clemong ingin meningkatkan penjualan pada segmen customer yang paling sedikit. Oleh karena itu, Clemong membutuhkan **segment customer** dan **jumlah transaksinya yang paling sedikit**.
 
@@ -373,6 +391,7 @@ Lalu, akan dilakukan pencetakan variabel SegMin dan Min sesuai format soal shift
  printf ("Tipe segmen customer yang penjualannya paling sedikit adalah %s dengan %d transaksi.\n", SegMin, Min)
 ```
 
+<a name="soal2d"></a>
 ### Soal 2d <br>
 TokoShiSop membagi wilayah bagian (region) penjualan menjadi empat bagian, antara lain: Central, East, South, dan West. Manis ingin mencari **wilayah bagian (region) yang memiliki total keuntungan (profit) paling sedikit** dan **total keuntungan wilayah tersebut**.
 
@@ -443,6 +462,7 @@ Lalu, akan dilakukan pencetakan variabel RegMin dan UntungMin sesuai format soal
 }'
 ```
 
+<a name="soal2e"></a>
 ### Soal 2e <br>
 Agar mudah dibaca oleh Manis, Clemong, dan Steven, (e) kamu diharapkan bisa membuat sebuah script yang akan menghasilkan file “hasil.txt” yang memiliki format sebagai berikut:
 
@@ -483,7 +503,54 @@ Gambar diatas merupakan output yang keluar pada hasil.txt menggunakan Linux Aman
 **Perintah** <br>
 Pada soal 3a, diperintahkan untuk mengunduh 23 gambar dari https://loremflickr.com/320/240/kitten dan menyimpan log-nya ke file ```Foto.log```. Jika ada gambar yang sama maka harus dihapus dan tidak perlu mengunduh gambar lagi untuk menggantinya. Gambar-gambar tersebut disimpan dengan nama ```Koleksi_XX``` berurutan tanpa ada nomor yang hilang (contoh: Koleksi_01, Koleksi_02, dst).
 
-<a name="sc3a"></a>
+**Penyelesaian** <br>
+Pertama, masuk ke directory untuk memastikan file terunduh di tempat yang tepat.
+```shell script
+cd ~/soal-shift-sisop-modul-1-B05-2021/soal3
+```
+
+Variabel ```count``` digunakan untuk men-tracking jumlah file yang telah ada di dalam directory (dengan catatan tidak ada file yang sama).
+
+<a name="langkah3a"></a>
+Berikut langkah penyelesaian untuk soal 3a:
+1. Dilakukan proses iterasi sebanyak 23 kali untuk mengunduh 23 file gambar.
+    ```shell script 
+    for ((i=1; i<=23; i=i+1))
+    ```
+2. Command ```wget``` untuk mengunduh file dari link https://loremflickr.com/320/240/kitten dan ```-O``` untuk me-rename file yang diunduh dengan format ```Koleksi_XX.jpg``` dan ```-a``` untuk menambahkan pesan output ke log file ```Foto.log``` tanpa overwriting.
+    ```shell script
+    wget -O "Koleksi_$count.jpg" -a "Foto.log" https://loremflickr.com/320/240/kitten
+    ```
+3. Untuk mengecek kesamaan file, dilakukan perbandingan antara file yang baru diunduh dengan file-file yang ada di dalam directory unduh. Digunakan ```cmp``` untuk membandingkan konten file dan ```--silent``` atau ```-s``` agar tidak menampilkan output dari proses perbandingan. 
+4. Return value dari ```$(cmp --silent "./Koleksi_$j.jpg" "./Koleksi_$count.jpg")``` disimpan dalam statement ```status=$?```. Dilakukan pengkondisian, jika isi file sama maka file yang baru diunduh dihapus dengan ```rm```.
+    ```shell script
+    # cek apakah ada yang sama
+            for ((j=1; j<count; j=j+1))
+            do
+                    check=$(cmp --silent "./Koleksi_$j.jpg" "./Koleksi_$count.jpg")
+                    status=$?
+                    if [ $status -eq 0 ]
+                    then
+                            # menghapus file yang sama
+                            rm "./Koleksi_$count.jpg"
+                            (( count-- ))
+                            break
+                    fi
+            done
+            (( count++ ))
+    ```
+5. Rename file sesuai format ```Koleksi_XX.jpg``` untuk file ke-1 sampai ke-9 dengan ```mv```. Cek eksistensi file terlebih dahulu dengan ```-e```.
+    ```shell script
+    for i in {1..9}
+    do
+            if [ -e "./Koleksi_$i.jpg" ]
+            then
+                    mv "Koleksi_$i.jpg" "Koleksi_0$i.jpg"
+            fi
+    done
+    ```
+    
+ <a name="sc3a"></a>
 **Source code 3a**
 ```shell script
 #!/bin/bash
@@ -525,57 +592,22 @@ do
 done
 ```
 
-**Penyelesaian** <br>
-Pertama, masuk ke directory untuk memastikan file terunduh di tempat yang tepat.
-```shell script
-cd ~/soal-shift-sisop-modul-1-B05-2021/soal3
-```
-
-Variabel ```count``` digunakan untuk men-tracking jumlah file yang telah ada di dalam directory (dengan catatan tidak ada file yang sama).
-
-<a name="langkah-3a"></a>
-Berikut langkah penyelesaian untuk soal 3a:
-1. Dilakukan proses iterasi sebanyak 23 kali untuk mengunduh 23 file gambar.
-    ```shell script 
-    for ((i=1; i<=23; i=i+1))
-    ```
-2. Command ```wget``` untuk mengunduh file dari link https://loremflickr.com/320/240/kitten dan ```-O``` untuk me-rename file yang diunduh dengan format ```Koleksi_XX.jpg``` dan ```-a``` untuk menambahkan pesan output ke log file ```Foto.log``` tanpa overwriting.
-    ```shell script
-    wget -O "Koleksi_$count.jpg" -a "Foto.log" https://loremflickr.com/320/240/kitten
-    ```
-3. Untuk mengecek kesamaan file, dilakukan perbandingan antara file yang baru diunduh dengan file-file yang ada di dalam directory unduh. Digunakan ```cmp``` untuk membandingkan konten file dan ```--silent``` atau ```-s``` agar tidak menampilkan output dari proses perbandingan. 
-4. Return value dari ```$(cmp --silent "./Koleksi_$j.jpg" "./Koleksi_$count.jpg")``` disimpan dalam statement ```status=$?```. Dilakukan pengkondisian, jika isi file sama maka file yang baru diunduh dihapus dengan ```rm```.
-    ```shell script
-    # cek apakah ada yang sama
-            for ((j=1; j<count; j=j+1))
-            do
-                    check=$(cmp --silent "./Koleksi_$j.jpg" "./Koleksi_$count.jpg")
-                    status=$?
-                    if [ $status -eq 0 ]
-                    then
-                            # menghapus file yang sama
-                            rm "./Koleksi_$count.jpg"
-                            (( count-- ))
-                            break
-                    fi
-            done
-            (( count++ ))
-    ```
-5. Rename file sesuai format ```Koleksi_XX.jpg``` untuk file ke-1 sampai ke-9 dengan ```mv```. Cek eksistensi file terlebih dahulu dengan ```-e```.
-    ```shell script
-    for i in {1..9}
-    do
-            if [ -e "./Koleksi_$i.jpg" ]
-            then
-                    mv "Koleksi_$i.jpg" "Koleksi_0$i.jpg"
-            fi
-    done
-    ```
-
 <a name="soal3b"></a>
 ### Soal 3b
 **Perintah** <br>
 Jalankan script [soal 3a](#sc3a) dengan cronjob **sehari sekali pada jam 8 malam** dan **tanggal 2 empat hari sekali**. Masukkan file unduh beserta ```Foto.log``` ke folder dengan nama sesuai tanggal unduh dengan format ```DD-MM-YYYY```.
+
+**Penyelesaian** <br>
+Buat directory baru ```mkdir``` dengan format penamaan sesuai dengan tanggal unduh. Untuk mendapatkan tanggal unduh, gunakan command ```date``` dalam hal ini dengan statement ```newDir=$(date +"%d-%m-%Y")```. Jalankan [soal 3a](#sc3a) dengan ```bash```. Kemudian pindahkan ```mv``` seluruh file unduh serta ```Foto.log``` ke directory ```newDir```. Untuk cron-nya,
+```shell script
+0 20 1-31/7,2-31/4 * * /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3b.sh
+```
+**Dari kiri ke kanan** <br>
+- 0 artinya cron dijalankan tiap menit 0 <br>
+- 20 artinya cron dijalankan tiap jam 20:00 <br>
+- 1-31/7 artinya cron dijalankan tiap 7 hari sekali, mulai dari tanggal 1 hingga tanggal 31 <br>
+- 2-31/4 artinya cron dijalankan tiap 4 hari sekali, mulai dari tanggal 2 hingga tanggal 31 <br>
+- \* \* artinya setiap bulan dan setiap hari <br>
 
 **Source code**
 ```shell script
@@ -602,23 +634,31 @@ mv Foto.log "./$newDir"
 0 20 1-31/7,2-31/4 * * /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3b.sh
 ```
 
-**Penyelesaian** <br>
-Buat directory baru ```mkdir``` dengan format penamaan sesuai dengan tanggal unduh. Untuk mendapatkan tanggal unduh, gunakan command ```date``` dalam hal ini dengan statement ```newDir=$(date +"%d-%m-%Y")```. Jalankan [soal 3a](#sc3a) dengan ```bash```. Kemudian pindahkan ```mv``` seluruh file unduh serta ```Foto.log``` ke directory ```newDir```. Untuk cron-nya,
-```shell script
-0 20 1-31/7,2-31/4 * * /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3b.sh
-```
-**Dari kiri ke kanan** <br>
-- 0 artinya cron dijalankan tiap menit 0 <br>
-- 20 artinya cron dijalankan tiap jam 20:00 <br>
-- 1-31/7 artinya cron dijalankan tiap 7 hari sekali, mulai dari tanggal 1 hingga tanggal 31 <br>
-- 2-31/4 artinya cron dijalankan tiap 4 hari sekali, mulai dari tanggal 2 hingga tanggal 31 <br>
-- \* \* artinya setiap bulan dan setiap hari <br>
-
 <a name="soal3c"></a>
 ### Soal 3c
 **Perintah** <br>
 Undur juga gambar kelinci dari https://loremflickr.com/320/240/bunny. Gambar kucing dan kelinci diundah secara bergantian setiap hari. Nama folder diberi awalan ```Kucing_DD-MM-YYYY``` atau ```Kelinci_DD-MM-YYYY``` dengan ```DD-MM-YYYY``` adalah tanggal unduh.
 
+**Penyelesaian** <br>
+Berikut adalah langkah penyelesaian soal 3c.
+1. Karena tidak ada aturan urutan yang harus diunduh terlebih dahulu, maka disini kita unduh file kelinci di hari pertama. Untuk menentukan file yang diunduh di hari selanjutnya, cek nama folder yang diunduh kemarin (disini kita cek dengan folder kelinci).
+	```shell script
+	if [ -d "Kelinci_$yesterdayDate" ]
+	```
+	Jika ditemukan folder dengan nama ```Kelinci_$yesterdayDate```, maka hari ini kita akan mengunduh file kucing. Sebaliknya, jika tidak ada maka unduh file kelinci.
+2. Buat folder baru dengan format ```Kucing_$currentDate``` atau ```Kelinci_$currentDate```.
+3. Untuk proses selanjutnya, sama dengan [langkah penyelesaian soal 3a](#langkah3a). Yang berbeda hanyalah link website yang harus disesuaikan dengan file yang hari itu diunduh.
+	```shell script
+	if [ $flag -eq 0 ]
+		then
+	    # unduh file kucing
+			 wget -O "Koleksi_$count.jpg" -a "Foto.log" https://loremflickr.com/320/240/kitten
+		else
+	    # unduh file kelinci
+			wget -O "Koleksi_$count.jpg" -a "Foto.log" https://loremflickr.com/320/240/bunny
+		fi
+	```
+	
 **Source Code**
 ```shell script
 #!/bin/bash
@@ -683,30 +723,13 @@ mv *.jpg "./$directoryName"
 mv Foto.log "./$directoryName"
 ```
 
-**Penyelesaian** <br>
-Berikut adalah langkah penyelesaian soal 3c.
-1. Karena tidak ada aturan urutan yang harus diunduh terlebih dahulu, maka disini kita unduh file kelinci di hari pertama. Untuk menentukan file yang diunduh di hari selanjutnya, cek nama folder yang diunduh kemarin (disini kita cek dengan folder kelinci).
-	```shell script
-	if [ -d "Kelinci_$yesterdayDate" ]
-	```
-	Jika ditemukan folder dengan nama ```Kelinci_$yesterdayDate```, maka hari ini kita akan mengunduh file kucing. Sebaliknya, jika tidak ada maka unduh file kelinci.
-2. Buat folder baru dengan format ```Kucing_$currentDate``` atau ```Kelinci_$currentDate```.
-3. Untuk proses selanjutnya, sama dengan [langkah penyelesaian soal 3a](langkah-3a). Yang berbeda hanyalah link website yang harus disesuaikan dengan file yang hari itu diunduh.
-	```shell script
-	if [ $flag -eq 0 ]
-		then
-	    # unduh file kucing
-			 wget -O "Koleksi_$count.jpg" -a "Foto.log" https://loremflickr.com/320/240/kitten
-		else
-	    # unduh file kelinci
-			wget -O "Koleksi_$count.jpg" -a "Foto.log" https://loremflickr.com/320/240/bunny
-		fi
-	```
-
 <a name="soal3d"></a>
 ### Soal 3d
 **Perintah** <br>
 Pindahkan seluruh folder ke zip dengan nama ```Koleksi.zip``` dan beri password berupa tanggal hari ini dengan format ```MMDDYYYYY```.
+
+**Penyelesaian** <br>
+Gunakan command ```zip``` untuk men-zip folder ```Kucing_*``` dan ```Kelinci_*```. ```-q``` untuk menyembunyikan output dari ketika proses men-zip file. ```-r``` untuk mengarsipkan folder dan seluruh isi folder. Command ```-m``` untuk menghapus folder-folder yang di-zip yaitu ```Kucing_*``` dan ```Kelinci_*```. ```-P``` atau ```--password``` untuk memberi password pada file ```Koleksi.zip``` berupa tanggal hari ini dengan format ```MMDDYYYY```.
 
 **Source Code**
 ```shell script
@@ -722,13 +745,33 @@ settingPassword=$(date +"%m%d%Y")
 zip -q -r -P "$settingPassword" -m Koleksi.zip Kucing_* Kelinci_*
 ```
 
-**Penyelesaian** <br>
-Gunakan command ```zip``` untuk men-zip folder ```Kucing_*``` dan ```Kelinci_*```. ```-q``` untuk menyembunyikan output dari ketika proses men-zip file. ```-r``` untuk mengarsipkan folder dan seluruh isi folder. ```-m``` untuk memindahkan folder ```Kucing_*``` dan ```Kelinci_*``` ke file ```Koleksi.zip```. ```-P``` atau ```--password``` untuk memberi password pada file ```Koleksi.zip``` berupa tanggal hari ini dengan format ```MMDDYYYY```.
-
 <a name="soal3e"></a>
 ### Soal 3e
 **Perintah** <br>
 ```zip``` file saat kuliah saja, yaitu jam 7 pagi sampai 6 sore dan file ter-```unzip``` saat tidak kuliah serta tidak ada file ```zip``` sama sekali.
+
+**Penyelesaian** <br>
+Untuk membuat file ter-```zip``` dan ter-```unzip``` secara otomatis pada jam kuliah, kita menggunakan ```cronjob```. Crontab untuk men-```zip``` file:
+```shell script
+# zip saat kuliah
+0 7 * * 1-5 /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3d.sh
+```
+**Dari kiri ke kanan**
+- 0 artinya zip pada menit ke nol
+- 7 artinya pada jam 07:00
+- \* \* artinya setiap hari dan setiap bulan
+- 1-5 artinya pada weekdays atau senin-jumat
+
+Untuk meng-```unzip``` file, gunakan command ```unzip -P```. ```-P``` atau ```--password``` untuk mengekstrak file ```zip``` yang mempunyai password. Kemudian, hapus file zip dengan ```rm```. Untuk crontabnya:
+```shell script
+# unzip saat tidak kuliah
+0 18 * * 1-5 /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3e.sh
+```
+**Dari kiri ke kanan**
+- 0 artinya unzip pada menit ke nol
+- 18 artinya pada jam 18:00
+- \* \* artinya setiap hari dan setiap bulan
+- 1-5 artinya pada weekdays atau senin-jumat
 
 **Source Code** <br>
 ```shell script
@@ -756,29 +799,7 @@ rm "./Koleksi.zip"
 0 18 * * 1-5 /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3e.sh
 ```
 
-**Penyelesaian** <br>
-Untuk membuat file ter-```zip``` dan ter-```unzip``` secara otomatis pada jam kuliah, kita menggunakan ```cronjob```. Crontab untuk men-```zip``` file:
-```shell script
-# zip saat kuliah
-0 7 * * 1-5 /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3d.sh
-```
-**Dari kiri ke kanan**
-- 0 artinya zip pada menit ke nol
-- 7 artinya pada jam 07:00
-- \* \* artinya setiap hari dan setiap bulan
-- 1-5 artinya pada weekdays atau senin-jumat
-
-Untuk meng-```unzip``` file, gunakan command ```unzip -P```. ```-P``` atau ```--password``` untuk mengekstrak file ```zip``` yang mempunyai password. Kemudian, hapus file zip dengan ```rm```. Untuk crontabnya:
-```shell script
-# unzip saat tidak kuliah
-0 18 * * 1-5 /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3e.sh
-```
-**Dari kiri ke kanan**
-- 0 artinya unzip pada menit ke nol
-- 18 artinya pada jam 18:00
-- \* \* artinya setiap hari dan setiap bulan
-- 1-5 artinya pada weekdays atau senin-jumat
-
 **Kendala dalam pengerjaan soal 3**
-1. Belum mengerti bagaimana cara menjalankan cronjob sehingga belum bisa mengecek kebenaran pengerjaan soal 3b dan 3e. Solusinya adalah ubah setting waktu pada linux dengan referensi berikut https://www.youtube.com/watch?v=HUX8pMEEj9g.
-2. Belum paham mengenai command-command pada terminal. Solusinya adalah membaca banyak referensi, salah satunya https://linuxize.com/post/how-to-zip-files-and-directories-in-linux/.
+1. Belum mengerti bagaimana cara menjalankan cron sehingga belum bisa mengecek kebenaran pengerjaan soal 3b dan 3e. Solusinya adalah ubah setting waktu pada linux dengan referensi berikut https://www.youtube.com/watch?v=HUX8pMEEj9g.
+2. File zip pada soal 3d hanya mengarsipkan foldernya saja, isinya tidak ikut terzip dan folder asli yang di-zip-kan tidak terhapus karena kurang menambahkan command ```-r``` untuk memindahkan isi dari folder dan command ```-m``` untuk menghapus folder asli dari zip.
+3. Belum paham mengenai command-command pada terminal. Solusinya adalah membaca banyak referensi, salah satunya https://linuxize.com/post/how-to-zip-files-and-directories-in-linux/.
