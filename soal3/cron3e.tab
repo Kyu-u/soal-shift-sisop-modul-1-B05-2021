@@ -2,4 +2,4 @@
 0 7 * * 1-5 /bin/bash ~/soal-shift-sisop-modul-1-B05-2021/soal3/soal3d.sh
 
 # unzip saat tidak kuliah
-0 18 * * 1-5 unzip -q -P `date +"%m%d%Y"` ~/soal-shift-sisop-modul-1-B05-2021/soal3/Koleksi.zip && rm ~/soal-shift-sisop-modul-1-B05-2021/soal3/Koleksi.zip 
+0 18 * * 1-5 cd ~/soal-shift-sisop-modul-1-B05-2021/soal3 && unzip -q -P $(date +"%m%d%Y") Koleksi.zip && rm Koleksi.zip
